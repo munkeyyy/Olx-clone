@@ -66,7 +66,7 @@ const NavBar = () => {
           }
           trigger="click"
         >
-          <button
+          <div
             onClick={handleLang}
             className={`roboto text-[1vw] flex items-center gap-1 font-medium  uppercase text-[#002E34] text-left ${
               language === "हिंदी" && "font-bold text-right"
@@ -80,7 +80,7 @@ const NavBar = () => {
             >
               <IoChevronDownOutline />
             </div>
-          </button>
+          </div>
         </Popover>
       </button>
       <div className="flex items-center gap-4 ml-2">
