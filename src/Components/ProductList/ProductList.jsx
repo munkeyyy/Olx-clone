@@ -26,7 +26,7 @@ const ProductList = () => {
 //   }
   return (
     <div className="mx-auto my-0 max-w-[1280px] py-6">
-      <h1 className="text-black font-medium text-[1.4vw] roboto">
+      <h1 className="text-black font-normal text-[1.4vw] roboto">
         Fresh Recommendations
       </h1>
       <>

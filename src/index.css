@@ -13,6 +13,9 @@ code {
 }
 
 
+.ant-modal .ant-modal-footer{
+  display: none
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

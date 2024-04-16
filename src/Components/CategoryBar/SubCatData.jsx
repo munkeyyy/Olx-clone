@@ -17,10 +17,10 @@ const SubCatData = () => {
             subCat.map((elem,i)=>{
                 return (
                     <div key={i} className='h-[max-content]'>
-                        <h1 className='font-medium text-[1vw] roboto'>{elem.title}</h1>
+                        <h1 className='font-medium text-[1vw] roboto cursor-pointer hover:text-[#00a49f]'>{elem.title}</h1>
                         {elem.subcategory.map((sub,i)=>(
                             <ul>
-                                <li className='roboto' key={i}>{sub.title}</li>
+                                <li className='roboto text-[.9vw] cursor-pointer my-2 text-black hover:text-[#00a49f]' key={i}>{sub.title}</li>
                             </ul>
                         ))}
                     </div>
