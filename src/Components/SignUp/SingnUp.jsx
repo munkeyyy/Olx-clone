@@ -3,9 +3,9 @@ import { Formik } from "formik";
 import axios from "axios";
 import { baseUrl } from "../../utils";
 import { notification } from "antd";
-const SingnUp = () => {
+const SingnUp = ({ setIsSignedUp }) => {
   return (
-    <div>
+    <div className="p-4">
       <Formik
         initialValues={{ user_name: "", email: "", password: "", phone: "" }}
         validate={(values) => {
@@ -49,6 +49,11 @@ const SingnUp = () => {
               notification.success({
                 message: "signed up successfully",
               });
+              setIsSignedUp(false);
+            })
+            .catch((err) => {
+              console.log(err);
+              // notification.error(err)
             });
         }}
       >
@@ -63,63 +68,77 @@ const SingnUp = () => {
           /* and other goodies */
         }) => (
           <form onSubmit={handleSubmit}>
-            <div className="flex flex-col my-2">
-              <input
-                type="text"
-                name="user_name"
-                className="border-black border px-2 py-3 rounded-md focus-visible:outline-none focus-visible:border-2 focus-visible:border-black"
-                placeholder="user name"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.user_name}
-              />
-              <span className="text-red-600 text-[.8vw] text-center">
-                {errors.user_name && touched.user_name && errors.user_name}
-              </span>
-            </div>
-            <div className="flex flex-col my-2">
-              <input
-                type="email"
-                name="email"
-                placeholder="email"
-                className="border-black border px-2 py-3 rounded-md focus-visible:outline-none focus-visible:border-2 focus-visible:border-black"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.email}
-              />
-              <span className="text-red-600 text-[.8vw] text-center">{errors.email && touched.email && errors.email}</span>
-            </div>
-            <div className="flex flex-col my-2">
-              <input
-                type="password"
-                name="password"
-                placeholder="password"
-                className="border-black border px-2 py-3 rounded-md focus-visible:outline-none focus-visible:border-2 focus-visible:border-black"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.password}
-              />
-              <span className="text-red-600 text-[.8vw] text-center">
-                {errors.password && touched.password && errors.password}
-              </span>
-            </div>
-            <div className="flex flex-col my-2">
-              <input
-                type="number"
-                placeholder="phone number"
-                name="phone"
-                className="border-black border px-2 py-3 rounded-md focus-visible:outline-none focus-visible:border-2 focus-visible:border-black"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.phone}
-              />
-              <span className="text-red-600 text-[.8vw] text-center">{errors.phone && touched.phone && errors.phone}</span>
-            </div>
+            <div className="flex flex-col gap-3">
+              <div className="flex flex-col my-2">
+                <input
+                  type="text"
+                  name="user_name"
+                  className="border-black border px-2 py-3 rounded-md focus-visible:outline-none focus-visible:border-2 focus-visible:border-black"
+                  placeholder="user name"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.user_name}
+                />
+                <span className="text-red-600 text-[.8vw] text-center">
+                  {errors.user_name && touched.user_name && errors.user_name}
+                </span>
+              </div>
+              <div className="flex flex-col my-2">
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="email"
+                  className="border-black border px-2 py-3 rounded-md focus-visible:outline-none focus-visible:border-2 focus-visible:border-black"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.email}
+                />
+                <span className="text-red-600 text-[.8vw] text-center">
+                  {errors.email && touched.email && errors.email}
+                </span>
+              </div>
+              <div className="flex flex-col my-2">
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="password"
+                  className="border-black border px-2 py-3 rounded-md focus-visible:outline-none focus-visible:border-2 focus-visible:border-black"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.password}
+                />
+                <span className="text-red-600 text-[.8vw] text-center">
+                  {errors.password && touched.password && errors.password}
+                </span>
+              </div>
+              <div className="flex flex-col my-2">
+                <input
+                  type="number"
+                  placeholder="phone number"
+                  name="phone"
+                  className="border-black border px-2 py-3 rounded-md focus-visible:outline-none focus-visible:border-2 focus-visible:border-black"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.phone}
+                />
+                <span className="text-red-600 text-[.8vw] text-center">
+                  {errors.phone && touched.phone && errors.phone}
+                </span>
+              </div>
 
-            <button type="submit">Submit</button>
+              <button
+                type="submit"
+                className="py-2 mx-auto rounded-md px-4 text-center bg-black text-white font-medium"
+              >
+                Sign up
+              </button>
+            </div>
           </form>
         )}
       </Formik>
+      <div onClick={()=>setIsSignedUp(false)} className="text-black mt-4 font-semibold underline cursor-pointer  text-[1vw]">
+        Already a User? <span className="underline-offset-1 text-[#00a49f]">log in</span>
+      </div>
     </div>
   );
 };

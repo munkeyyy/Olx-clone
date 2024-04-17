@@ -12,10 +12,21 @@ code {
     monospace;
 }
 
+.ant-modal{
+  width: 385px !important
+  ;
+}
 
-.ant-modal .ant-modal-footer{
+.ant-modal .ant-modal-footer {
   display: none
 }
+
+.ant-modal .ant-modal-title {
+  text-align: center;
+  font-family: "roboto", sans-serif;
+  font-size: 2vw;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

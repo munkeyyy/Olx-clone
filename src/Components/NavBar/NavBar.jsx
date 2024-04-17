@@ -4,11 +4,13 @@ import Logo from "../Logo";
 import { IoChevronDownOutline, IoSearchSharp } from "react-icons/io5";
 import { FaPlus } from "react-icons/fa";
 import SingnUp from "../SignUp/SingnUp";
+import LogIn from "../LogIn/LogIn";
 const NavBar = () => {
   const [isRotating, setIsRotating] = useState(false);
 
   const [language, setLanguage] = useState("english");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSignedUp, setIsSignedUp] = useState(true);
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -97,8 +99,16 @@ const NavBar = () => {
         >
           Login
         </div>
-        <Modal title="Sign Up" open={isModalOpen} onCancel={()=>setIsModalOpen(false)}>
-          <SingnUp />
+        <Modal
+          title={isSignedUp ? "Sign Up" : "Log In"}
+          open={isModalOpen}
+          onCancel={() => setIsModalOpen(false)}
+        >
+          {isSignedUp ? (
+            <SingnUp setIsSignedUp={setIsSignedUp} />
+          ) : (
+            <LogIn setIsModalOpen={setIsModalOpen} />
+          )}
         </Modal>
         <button className="relative roboto font-medium uppercase">
           <svg
