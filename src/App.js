@@ -5,10 +5,13 @@ import ProductList from "./Components/ProductList/ProductList";
 import Loader from "./Components/Loader";
 import { Route, Router, Routes } from "react-router-dom";
 import Footer from "./Components/Footer/Footer";
+import LogInProvider from "./contexts/Login/LogInProvider";
 function App() {
   return (
     <div className="App">
-      <NavBar />
+      <LogInProvider>
+        <NavBar />
+      </LogInProvider>
       <Routes>
         <Route
           path="/"
@@ -19,9 +22,8 @@ function App() {
             </div>
           }
         />
-        
       </Routes>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

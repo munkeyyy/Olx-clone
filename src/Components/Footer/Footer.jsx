@@ -6,6 +6,8 @@ import { footerLinks } from "./links";
 const Footer = () => {
   return (
     <div>
+        <div>
+
       <div className="head flex justify-center items-center w-full bg-[rgba(0,47,52,0.03)]">
         <div className="w-[33.33%]">
           <div className="app_img relative">
@@ -58,7 +60,8 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className=".links  bg-[rgba(235,238,239,1)] flex items-start p-4 justify-between">
+        </div>
+      <div className=".links px-32  bg-[rgba(235,238,239,1)] flex items-start p-4 justify-between">
         {footerLinks.map((link, i) => (
           <div key={i}>
             <h1 className="font-semibold roboto text-black text-[1.3vw]">{link.title}</h1>

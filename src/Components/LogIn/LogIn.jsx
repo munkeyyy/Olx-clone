@@ -1,11 +1,18 @@
-import axios from 'axios';
-import { Formik } from 'formik';
-import React from 'react'
-import { baseUrl } from '../../utils';
-import { notification } from 'antd';
-import { useNavigate } from 'react-router-dom';
-const LogIn = ({setIsModalOpen}) => {
-    const navigate= useNavigate()
+import axios from "axios";
+import { Formik } from "formik";
+import React, { useContext } from "react";
+import { baseUrl } from "../../utils";
+import { notification } from "antd";
+import { useNavigate, useParams } from "react-router-dom";
+import { LoginContext } from "../../contexts/Login/LoginContext";
+import { UserContext } from "../../contexts/User/UserContext";
+const LogIn = ({ setIsModalOpen }) => {
+  const navigate = useNavigate();
+
+  const { setIsLoggedIn } = useContext(LoginContext);
+
+  const { setUser } = useContext(UserContext);
+
   return (
     <div className="p-4">
       <Formik
@@ -31,25 +38,25 @@ const LogIn = ({setIsModalOpen}) => {
           console.log(values);
           axios
             .post(`${baseUrl}users/sign-in`, {
-            
               email: values.email,
               password: values.password,
-           
             })
             .then((res) => {
-              console.log(res.data);
+              setUser(res.data.data);
+              console.log(res.data.data);
               notification.success({
                 message: res.data.message,
               });
-              localStorage.setItem("token", res.data.token)
-              setIsModalOpen(false)
-              navigate("/")
+              localStorage.setItem("token", res.data.token);
+              setIsModalOpen(false);
+              setIsLoggedIn(true);
+
+              navigate("/");
             })
-            .catch((err)=>{
-              console.log(err)
+            .catch((err) => {
+              console.log(err);
               // notification.error(err)
-            }
-          )
+            });
         }}
       >
         {({
@@ -64,42 +71,47 @@ const LogIn = ({setIsModalOpen}) => {
         }) => (
           <form onSubmit={handleSubmit}>
             <div className="flex flex-col gap-3">
+              <div className="flex flex-col my-2">
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="email"
+                  className="border-black border px-2 py-3 rounded-md focus-visible:outline-none focus-visible:border-2 focus-visible:border-black"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.email}
+                />
+                <span className="text-red-600 text-[.8vw] text-center">
+                  {errors.email && touched.email && errors.email}
+                </span>
+              </div>
+              <div className="flex flex-col my-2">
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="password"
+                  className="border-black border px-2 py-3 rounded-md focus-visible:outline-none focus-visible:border-2 focus-visible:border-black"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.password}
+                />
+                <span className="text-red-600 text-[.8vw] text-center">
+                  {errors.password && touched.password && errors.password}
+                </span>
+              </div>
 
-         
-            <div className="flex flex-col my-2">
-              <input
-                type="email"
-                name="email"
-                placeholder="email"
-                className="border-black border px-2 py-3 rounded-md focus-visible:outline-none focus-visible:border-2 focus-visible:border-black"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.email}
-              />
-              <span className="text-red-600 text-[.8vw] text-center">{errors.email && touched.email && errors.email}</span>
-            </div>
-            <div className="flex flex-col my-2">
-              <input
-                type="password"
-                name="password"
-                placeholder="password"
-                className="border-black border px-2 py-3 rounded-md focus-visible:outline-none focus-visible:border-2 focus-visible:border-black"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.password}
-              />
-              <span className="text-red-600 text-[.8vw] text-center">
-                {errors.password && touched.password && errors.password}
-              </span>
-            </div>
-
-            <button type="submit" className="py-2 mx-auto px-4 rounded-md text-center bg-black text-white font-medium">Log In</button>
+              <button
+                type="submit"
+                className="py-2 mx-auto px-4 rounded-md text-center bg-black text-white font-medium"
+              >
+                Log In
+              </button>
             </div>
           </form>
         )}
       </Formik>
     </div>
-  )
-}
+  );
+};
 
-export default LogIn
+export default LogIn;
