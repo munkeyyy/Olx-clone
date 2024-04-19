@@ -54,8 +54,7 @@ const LogIn = ({ setIsModalOpen }) => {
               navigate("/");
             })
             .catch((err) => {
-              console.log(err);
-              // notification.error(err)
+              notification.error({message:err.response.data.message});
             });
         }}
       >

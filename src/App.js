@@ -6,25 +6,34 @@ import Loader from "./Components/Loader";
 import { Route, Router, Routes } from "react-router-dom";
 import Footer from "./Components/Footer/Footer";
 import LogInProvider from "./contexts/Login/LogInProvider";
+import ProfilePage from "./Components/ProfilePage/ProfilePage";
+import UserProvider from "./contexts/User/UserProvider";
+import EditProfile from "./Components/EditProfile/EditProfile";
+import SearchProvider from "./contexts/Search/SearchProvider";
 function App() {
   return (
-    <div className="App">
-      <LogInProvider>
-        <NavBar />
-      </LogInProvider>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <div>
-              <CategoryBar />
-              <ProductList />
-            </div>
-          }
-        />
-      </Routes>
-      <Footer />
-    </div>
+    <UserProvider>
+      <SearchProvider>
+        <div className="App">
+          <LogInProvider>
+            <NavBar />
+          </LogInProvider>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <div>
+                  <CategoryBar />
+                  <ProductList />
+                </div>
+              }
+            />
+            <Route path="/editprofile" element={<EditProfile />} />
+          </Routes>
+          <Footer />
+        </div>
+      </SearchProvider>
+    </UserProvider>
   );
 }
 

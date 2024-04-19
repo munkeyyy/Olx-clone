@@ -1,12 +1,14 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { baseUrl } from "../../utils";
 import ProductCard from "./ProductCard";
 import Loader from "../Loader";
+import { SearchContext } from "../../contexts/Search/SearchContext";
 
 const ProductList = () => {
   const [proData, setProData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const{search}=useContext(SearchContext)
 //   const [page, setPage] = useState(1);
 
   useEffect(() => {
@@ -35,8 +37,8 @@ const ProductList = () => {
         ) : (
           <>
             <div className="flex justify-start gap-4 flex-wrap mt-4">
-              {proData &&
-                proData.map((product, i) => (
+              {search &&
+                search.map((product, i) => (
                   <div key={i}>
                     <ProductCard
                       title={product.title}
