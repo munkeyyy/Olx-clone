@@ -49,7 +49,7 @@ const NavBar = () => {
         )
         // .then((response) => response.json())
         .then((result) => {
-          console.log(result.data.features[0].properties);
+          // console.log(result.data.features[0].properties);
           setAddress([result.data.features[0].properties]);
           setLoading(false);
           localStorage.setItem(
@@ -81,6 +81,28 @@ const NavBar = () => {
   useEffect(() => {
     getData();
   }, []);
+
+  const googleTranslateElementInit = () => {
+    new window.google.translate.TranslateElement(
+      {
+        pageLanguage: "en",
+        includedLanguages : "en,hi", // include this for selected languages
+        layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE,
+      },
+      "google_translate_element"
+    );
+  };
+
+  useEffect(() => {
+    var addScript = document.createElement("script");
+    addScript.setAttribute(
+      "src",
+      "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+    );
+    document.body.appendChild(addScript);
+    window.googleTranslateElementInit = googleTranslateElementInit;
+  }, []);
+
   return (
     <div className="flex bg-[#EEF1F3] border-b-4 border-white  py-3 px-4 shadow-md sticky top-0 w-full z-[99] items-center gap-4">
       <div onClick={() => navigate("/")} className="logo">
@@ -130,49 +152,8 @@ const NavBar = () => {
           </div>
         </form>
       </div>
-      <button className="lang">
-        <Popover
-          placement="bottom"
-          content={
-            <div className="py-1 w-full px-4 font-sans text-[1.1vw] flex flex-col gap-4  uppercase text-[#002E34]">
-              <div
-                onClick={() => setLanguage("english")}
-                className="cursor-pointer font-semibold flex items-center justify-between gap-6"
-              >
-                English{" "}
-                {language === "english" && (
-                  <span className="h-2 w-2 bg-green-300 rounded-full"></span>
-                )}
-              </div>
-              <div
-                onClick={() => setLanguage("हिंदी")}
-                className="cursor-pointer font-bold flex items-center justify-between gap-6"
-              >
-                हिंदी{" "}
-                {language === "हिंदी" && (
-                  <span className="h-2 w-2 bg-green-300 rounded-full"></span>
-                )}
-              </div>
-            </div>
-          }
-          trigger="click"
-        >
-          <div
-            onClick={handleLang}
-            className={`roboto text-[1vw] flex items-center gap-1 font-medium  uppercase text-[#002E34] text-left ${
-              language === "हिंदी" && "font-bold text-right"
-            }`}
-          >
-            {language}
-            <div
-              className={`font-medium uppercase text-[1.3vw] text-[#002E34] ${
-                isRotating ? "rotate-180" : "rotate-0"
-              } transition-[all.9s]`}
-            >
-              <IoChevronDownOutline />
-            </div>
-          </div>
-        </Popover>
+      <button className="lang overflow-hidden p-3 w-[20%] bg-white">
+        <div id="google_translate_element"></div>
       </button>
 
       <div className="flex items-center gap-4 ml-2">

@@ -10,6 +10,7 @@ import ProfilePage from "./Components/ProfilePage/ProfilePage";
 import UserProvider from "./contexts/User/UserProvider";
 import EditProfile from "./Components/EditProfile/EditProfile";
 import SearchProvider from "./contexts/Search/SearchProvider";
+import SingleProduct from "./Components/SingleProduct/SingleProduct";
 function App() {
   return (
     <UserProvider>
@@ -29,6 +30,8 @@ function App() {
               }
             />
             <Route path="/editprofile" element={<EditProfile />} />
+            <Route path="/profile" element={<ProfilePage/>} />
+            <Route Path="/singleproduct/:id" element={<SingleProduct/>}/>
           </Routes>
           <Footer />
         </div>

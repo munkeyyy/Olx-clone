@@ -2,7 +2,7 @@ import React from 'react'
 
 const ProductCard = ({title, price, location, day, thumbnail}) => {
   return (
-    <div className='p-2 border w-[18vw] bg-white overflow-clip border-gray-300 rounded-lg'>
+    <div className='p-2 border md:w-[29vw] lg:w-[21vw] xl:w-[18vw] bg-white overflow-clip border-gray-300 rounded-lg'>
         <div className='image h-[10rem] bg-gray-300 w-full'>
             <img src={thumbnail} alt="thumb" className='h-full w-full mix-blend-multiply object-contain'/>
         </div>

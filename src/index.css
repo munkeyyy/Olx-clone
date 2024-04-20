@@ -12,6 +12,20 @@ code {
     monospace;
 }
 
+.goog-te-gadget-simple{
+  display: flex !important;
+  padding: 0 !important;
+  border: none !important;
+}
+
+.goog-te-gadget-simple img, .goog-te-gadget-simple span img{
+  display: none !important;
+}
+
+.goog-te-gadget-simple span{
+  flex-grow: 1 !important;
+}
+
 .ant-modal{
   width: 385px !important
   ;

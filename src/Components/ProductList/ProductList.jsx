@@ -4,22 +4,23 @@ import { baseUrl } from "../../utils";
 import ProductCard from "./ProductCard";
 import Loader from "../Loader";
 import { SearchContext } from "../../contexts/Search/SearchContext";
+import { useNavigate } from "react-router-dom";
+
 
 const ProductList = () => {
-  const [proData, setProData] = useState([]);
   const [loading, setLoading] = useState(true);
   const{search}=useContext(SearchContext)
+  const navigate= useNavigate()
 //   const [page, setPage] = useState(1);
 
   useEffect(() => {
     axios
       .get(`${baseUrl}products/get-products`)
       .then((res) => {
-        setProData(res.data.data);
         setLoading(false);
         console.log(res.data.data)
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err));  
   }, []);
 //   const handlePage=()=>{
 //     setPage((prev)=>prev+1)
@@ -27,7 +28,7 @@ const ProductList = () => {
 //     console.log(page, proData)
 //   }
   return (
-    <div className="mx-auto my-0 max-w-[1280px] py-6">
+    <div className="mx-auto my-0 max-w-[1280px] px-8 py-6">
       <h1 className="text-black font-normal text-[1.4vw] roboto">
         Fresh Recommendations
       </h1>
@@ -39,7 +40,7 @@ const ProductList = () => {
             <div className="flex justify-start gap-4 flex-wrap mt-4">
               {search &&
                 search.map((product, i) => (
-                  <div key={i}>
+                  <div className="" onClick={()=>navigate(`/singleproduct/${product._id}`)} key={i}>
                     <ProductCard
                       title={product.title}
                       price={product.price}
