@@ -27,6 +27,11 @@ const ProductList = () => {
 //     console.log("page",page)
 //     console.log(page, proData)
 //   }
+
+const singleHand=(id)=>{
+  console.log("hjvvcdv",id)
+  navigate(`/singleproduct/${id}`)
+}
   return (
     <div className="mx-auto my-0 max-w-[1280px] px-8 py-6">
       <h1 className="text-black font-normal text-[1.4vw] roboto">
@@ -40,7 +45,7 @@ const ProductList = () => {
             <div className="flex justify-start gap-4 flex-wrap mt-4">
               {search &&
                 search.map((product, i) => (
-                  <div className="" onClick={()=>navigate(`/singleproduct/${product._id}`)} key={i}>
+                  <div className="" onClick={()=>singleHand(product._id)} key={i}>
                     <ProductCard
                       title={product.title}
                       price={product.price}

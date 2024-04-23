@@ -31,7 +31,7 @@ function App() {
             />
             <Route path="/editprofile" element={<EditProfile />} />
             <Route path="/profile" element={<ProfilePage/>} />
-            <Route Path="/singleproduct/:id" element={<SingleProduct/>}/>
+            <Route Path="/singleproduct/:single_id" element={<SingleProduct/>}/>
           </Routes>
           <Footer />
         </div>

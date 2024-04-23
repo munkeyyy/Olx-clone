@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState,useRef } from "react";
 import { UserContext } from "../../contexts/User/UserContext";
 import { useNavigate } from "react-router-dom";
 import { Formik } from "formik";
@@ -9,15 +9,26 @@ import Avatar from "../../images/default_avatar.webp";
 import { FaPencil } from "react-icons/fa6";
 
 const EditProfile = () => {
-  const { user } = useContext(UserContext);
+  const { user ,setUser} = useContext(UserContext);
   console.log(user);
+  // if(user == undefined){
+  //   const userdata = JSON.parse(localStorage.getItem("user"))
+  //   console.log(userdata)
+  //   setUser(userdata)
+  // }
   const [img, setImg] = useState(null);
+  const imgRef = useRef();
   const navigate = useNavigate();
   const fileChange = (e, handleChange) => {
     console.log(e.target.file);
     setImg(URL.createObjectURL(e.target.files[0]));
     handleChange(e);
   };
+
+  // const updateImage = (e)=>{
+  //   const url = URL.createObjectURL(e.target.files[0])
+  //   setImg(url)
+  // }
   return (
     <div className="flex items-start gap-6 realtive p-10 mx-auto my-0 max-w-[1280px]">
       <div className="w-[20%] box-shadow   sticky top-[120px]  ">
@@ -72,18 +83,25 @@ const EditProfile = () => {
             }}
             onSubmit={(values) => {
               console.log(values);
-              const formData= new FormData()
+              console.log(user._id);
+              const formData = new FormData();
               formData.append("user_name", values.user_name);
               formData.append("email", values.email);
               formData.append("phone", values.phone);
               // Append image file
-              if(img){
-
-                formData.append("avatar", img);
+              if (img) {
+                formData.append("avatar", imgRef.current.files[0]);
               }
+              console.log(formData);
               axios
-                .put(`${baseUrl}users/update-user/${user._id}`, formData)
+                .put(`${baseUrl}users/update-user/${user._id}`,formData,{
+                  headers:{
+                    "Content-Type":"multipart/form-data"
+                  }
+                
+                })
                 .then((res) => {
+                  console.log(formData)
                   console.log(res.data);
                   notification.success({
                     message: "Profile updated successfully",
@@ -136,7 +154,7 @@ const EditProfile = () => {
                             <div className="flex  flex-col  items-start justify-center">
                               <div className="w-[10vw] relative h-[10vw] rounded-full  overflow-clip">
                                 <img
-                                  src={values.avatar?values.avatar:Avatar}
+                                  src={img?img:values.avatar}
                                   className="rounded-full h-full w-full object-center object-cover"
                                   alt="avatar"
                                 />
@@ -147,12 +165,11 @@ const EditProfile = () => {
                             </div>
                             <input
                               type="file"
+                              ref={imgRef}
                               name="avatar"
-                              onChange={(e) => {
-                                fileChange(e, handleChange);
-                              }}
+                              onChange={(e)=>fileChange(e,handleChange)}
+                              // onChange={updateImage}
                               className="w-0 h-0"
-                              onBlur={handleBlur}
                             />
                           </>
 
@@ -194,7 +211,9 @@ const EditProfile = () => {
                             {errors.phone && touched.phone && errors.phone}
                           </span>
                         </div>
-                        <p className="text-[.9vw] font-medium text-gray-400">Your number is verified!</p>
+                        <p className="text-[.9vw] font-medium text-gray-400">
+                          Your number is verified!
+                        </p>
                       </div>
                       <div className="flex items-center gap-6 ">
                         <div className="flex flex-col my-2 w-[28vw]">
@@ -211,11 +230,14 @@ const EditProfile = () => {
                             {errors.email && touched.email && errors.email}
                           </span>
                         </div>
-                        <p className="text-[.9vw] font-medium text-gray-400">Your Email is never shared with external parties nor do we use it to spam you in any way</p>
+                        <p className="text-[.9vw] font-medium text-gray-400">
+                          Your Email is never shared with external parties nor
+                          do we use it to spam you in any way
+                        </p>
                       </div>
                     </div>
                   </div>
-                      
+
                   <button
                     type="submit"
                     className="py-2 mx-auto rounded-md px-4 text-center bg-black text-white font-medium"

@@ -7,7 +7,7 @@ import { RiLogoutBoxLine } from "react-icons/ri";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { LoginContext } from "../../contexts/Login/LoginContext";
 const UserProfile = () => {
-  const { user,setUser } = useContext(UserContext);
+  const {user } = useContext(UserContext)
   const{setIsLoggedIn}=useContext(LoginContext)
   const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(false);
@@ -72,7 +72,7 @@ const UserProfile = () => {
           </div>
           <div
             onClick={() =>{ 
-              setUser([])
+              localStorage.clear()
               setIsLoggedIn(false)
             }}
             className="text-[#002f34] py-4 hover:bg-[#00ffff43] cursor-pointer font-medium text-[1.2vw] flex items-center gap-6"

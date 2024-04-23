@@ -48,6 +48,7 @@ const LogIn = ({ setIsModalOpen }) => {
                 message: res.data.message,
               });
               localStorage.setItem("token", res.data.token);
+              localStorage.setItem("user", JSON.stringify(res.data.data))
               setIsModalOpen(false);
               setIsLoggedIn(true);
 

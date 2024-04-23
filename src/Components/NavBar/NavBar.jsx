@@ -110,7 +110,7 @@ const NavBar = () => {
       </div>
       <div
         onClick={handleClick}
-        className="bg-white transition-[all.8s] active:scale-[.95] border-black border-2 py-2 px-6 lg:w-[20%] xl:w-[21%] rounded-sm"
+        className="bg-white transition-[all.8s] active:scale-[.95] location cursor-pointer border-black border-2 py-2 px-6 text-[1.2vw] md:w-[38%] flex justify-center lg:w-[52%] rounded-sm overflow-x-auto"
       >
         {loading ? (
           <Loader />
@@ -121,12 +121,11 @@ const NavBar = () => {
                   console.log(elem);
                   return (
                     <div
-                      className="text-black roboto flex items-center gap-2 overflow-auto w-full"
+                      className="text-black roboto flex justify-center gap-2  w-[22vw]"
                       key={i}
                     >
-                      <span>{elem.address_line1}</span>
-                      <span>{elem.city}</span>
-                      <span>{elem.country}</span>
+                      <span className="inline-flex">{elem.address_line1},{elem.city},{elem.country}</span>
+                      
                     </div>
                   );
                 })
@@ -140,12 +139,12 @@ const NavBar = () => {
             <input
               onChange={changeHandler}
               type="text"
-              className="w-full bg-white border-black border-2 py-2.5 rounded-none px-3"
+              className="w-full bg-white text-[1.2vw] border-black border-2 py-2.5 rounded-none px-3"
               placeholder="Find Cars, Mobile Phones and more..."
             />
             <button
               onClick={getData}
-              className="bg-[#002E34] h-[48px] min-w-[48px] text-[1.79vw] rounded-r-sm py-2  px-2 text-white "
+              className="bg-[#002E34] h-[48px] min-w-[48px] flex justify-center items-center text-[1.5vw] rounded-r-sm py-2  px-2 text-white "
             >
               <IoSearchSharp />
             </button>
