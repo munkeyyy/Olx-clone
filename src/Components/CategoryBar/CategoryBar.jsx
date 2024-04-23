@@ -20,7 +20,7 @@ const CategoryBar = () => {
           <IoChevronDownOutline size={"1.5rem"} />
         </span>
       </button>
-      <div className={`bg-white z-[2] py-10 px-4 absolute left-[20%] shadow top-[20%] translate-x-[-12%] translate-y-[4%] ${isRotating?"block":"hidden"}`}>
+      <div className={`bg-white z-[11] py-10 px-4 absolute left-[20%] shadow top-[20%] translate-x-[-12%] translate-y-[4%] ${isRotating?"block":"hidden"}`}>
             <SubCatData/>
       </div>
 

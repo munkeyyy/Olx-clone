@@ -22,7 +22,6 @@ const NavBar = () => {
   const [isSignedUp, setIsSignedUp] = useState(true);
   const [address, setAddress] = useState([]);
   const [isClicked, setIsClicked] = useState(false);
-  const [loading, setLoading] = useState(true);
   const [value, setValue] = useState("");
   const showModal = () => {
     setIsModalOpen(true);
@@ -33,7 +32,7 @@ const NavBar = () => {
   // const handleSubmit = (e) => {
   //   e.preventDefault();
   // };
-  const { serach, setSearch } = useContext(SearchContext);
+  const { getData,loading, setLoading } = useContext(SearchContext);
 
   const handleLang = () => {
     setIsRotating(!isRotating);
@@ -64,16 +63,7 @@ const NavBar = () => {
     getLocation();
     setIsClicked(true);
   };
-  const getData = (val = "") => {
-    // val.preventDefault()
-    axios
-      .get(`${baseUrl}products/get-products?search=${val}`)
-      .then((res) => {
-        console.log(res.data.data);
-        setSearch(res.data.data);
-      })
-      .catch((err) => console.log(err));
-  };
+
   const navigate = useNavigate();
   const changeHandler = (e) => {
     getData(e.target.value);
@@ -105,21 +95,20 @@ const NavBar = () => {
 
   return (
     <div className="flex bg-[#EEF1F3] border-b-4 border-white  py-3 px-4 shadow-md sticky top-0 w-full z-[99] items-center gap-4">
-      <div onClick={() => navigate("/")} className="logo">
+      <div onClick={() => navigate("/")} className="logo cursor-pointer">
         <Logo />
       </div>
       <div
         onClick={handleClick}
         className="bg-white transition-[all.8s] active:scale-[.95] location cursor-pointer border-black border-2 py-2 px-6 text-[1.2vw] md:w-[38%] flex justify-center lg:w-[52%] rounded-sm overflow-x-auto"
       >
-        {loading ? (
-          <Loader />
-        ) : (
+        
           <>
             {isClicked
               ? address.map((elem, i) => {
                   console.log(elem);
                   return (
+                    
                     <div
                       className="text-black roboto flex justify-center gap-2  w-[22vw]"
                       key={i}
@@ -131,7 +120,7 @@ const NavBar = () => {
                 })
               : "use current location"}
           </>
-        )}
+      
       </div>
       <div className="search lg:w-[50%] xl:w-full">
         <form action="">
@@ -142,12 +131,7 @@ const NavBar = () => {
               className="w-full bg-white text-[1.2vw] border-black border-2 py-2.5 rounded-none px-3"
               placeholder="Find Cars, Mobile Phones and more..."
             />
-            <button
-              onClick={getData}
-              className="bg-[#002E34] h-[48px] min-w-[48px] flex justify-center items-center text-[1.5vw] rounded-r-sm py-2  px-2 text-white "
-            >
-              <IoSearchSharp />
-            </button>
+          
           </div>
         </form>
       </div>

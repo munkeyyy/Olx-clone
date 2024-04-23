@@ -7,8 +7,8 @@ import { RiLogoutBoxLine } from "react-icons/ri";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { LoginContext } from "../../contexts/Login/LoginContext";
 const UserProfile = () => {
-  const {user } = useContext(UserContext)
-  const{setIsLoggedIn}=useContext(LoginContext)
+  const { user } = useContext(UserContext);
+  const { setIsLoggedIn } = useContext(LoginContext);
   const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(false);
   // useEffect(()=>{
@@ -60,20 +60,26 @@ const UserProfile = () => {
             }}
             className="text-white mt-3 bg-[#002f34] py-2 px-4 rounded-md roboto font-medium w-full capitalize"
           >
-            view Profile
+            view Profile & Edit Profile
           </button>
         </div>
         <div className="p-4 border-y">
-          <div className="text-[#002f34] py-4 hover:bg-[#00ffff43] cursor-pointer font-medium text-[1.2vw] flex items-center gap-6">
+          <div
+            onClick={() => {
+              navigate("/my-favourites");
+              setIsVisible(!isVisible);
+            }}
+            className="text-[#002f34] py-4 hover:bg-[#00ffff43] cursor-pointer font-medium text-[1.2vw] flex items-center gap-6"
+          >
             <div className="text-[1.5vw]">
               <FaRegHeart />
             </div>
-            <span>My ADS</span>
+            <span>Favourites</span>
           </div>
           <div
-            onClick={() =>{ 
-              localStorage.clear()
-              setIsLoggedIn(false)
+            onClick={() => {
+              localStorage.clear();
+              setIsLoggedIn(false);
             }}
             className="text-[#002f34] py-4 hover:bg-[#00ffff43] cursor-pointer font-medium text-[1.2vw] flex items-center gap-6"
           >

@@ -11,6 +11,7 @@ import UserProvider from "./contexts/User/UserProvider";
 import EditProfile from "./Components/EditProfile/EditProfile";
 import SearchProvider from "./contexts/Search/SearchProvider";
 import SingleProduct from "./Components/SingleProduct/SingleProduct";
+import Favourites from "./Components/Favourites/Favourites";
 function App() {
   return (
     <UserProvider>
@@ -19,19 +20,20 @@ function App() {
           <LogInProvider>
             <NavBar />
           </LogInProvider>
+            <CategoryBar />
           <Routes>
             <Route
               path="/"
               element={
                 <div>
-                  <CategoryBar />
                   <ProductList />
                 </div>
               }
             />
+            <Route Path="/singleproduct/:single_id" element={<SingleProduct/>}/>
             <Route path="/editprofile" element={<EditProfile />} />
             <Route path="/profile" element={<ProfilePage/>} />
-            <Route Path="/singleproduct/:single_id" element={<SingleProduct/>}/>
+            <Route path="/my-favourites" element={<Favourites/>} />
           </Routes>
           <Footer />
         </div>
