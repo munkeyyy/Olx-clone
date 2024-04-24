@@ -16,7 +16,7 @@ const ProductList = () => {
 
   const singleHand = (id) => {
     console.log("hjvvcdv", id);
-    navigate(`/singleproduct/${id}`);
+    navigate(`/single_page/${id}`);
   };
 
   const addFav = (user, product) => {

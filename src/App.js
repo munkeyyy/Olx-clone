@@ -10,8 +10,8 @@ import ProfilePage from "./Components/ProfilePage/ProfilePage";
 import UserProvider from "./contexts/User/UserProvider";
 import EditProfile from "./Components/EditProfile/EditProfile";
 import SearchProvider from "./contexts/Search/SearchProvider";
-import SingleProduct from "./Components/SingleProduct/SingleProduct";
 import Favourites from "./Components/Favourites/Favourites";
+import SingleProductPage from "./Components/SingleProduct/SingleProductPage";
 function App() {
   return (
     <UserProvider>
@@ -30,7 +30,7 @@ function App() {
                 </div>
               }
             />
-            <Route Path="/singleproduct/:single_id" element={<SingleProduct/>}/>
+            <Route path="/single_page/:_id" element={<SingleProductPage/>} />
             <Route path="/editprofile" element={<EditProfile />} />
             <Route path="/profile" element={<ProfilePage/>} />
             <Route path="/my-favourites" element={<Favourites/>} />
