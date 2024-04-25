@@ -31,7 +31,7 @@ const EditProfile = () => {
   // }
   return (
     <div className="flex items-start gap-6 realtive p-10 mx-auto my-0 max-w-[1280px]">
-      <div className="w-[20%] box-shadow   sticky top-[120px]  ">
+      <div className="w-[20%] sticky top-[120px]  ">
         <div
           className={`roboto cursor-pointer my-2 text-[1.1vw] font-semibold text-black`}
         >
@@ -82,8 +82,8 @@ const EditProfile = () => {
               return errors;
             }}
             onSubmit={(values) => {
-              console.log(values);
-              console.log(user._id);
+              // console.log(values);
+              // console.log(user._id);
               const formData = new FormData();
               formData.append("user_name", values.user_name);
               formData.append("email", values.email);
