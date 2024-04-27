@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { IoChevronDownOutline } from "react-icons/io5";
 import axios from "axios"
 import SubCatData from "./SubCatData";
 import { baseUrl } from "../../utils";
+import { SearchContext } from "../../contexts/Search/SearchContext";
 
 const CategoryBar = () => {
     const[isRotating, setIsRotating]=useState(false)
     const [categories, setCategories]= useState([])
+    const {getData}= useContext(SearchContext)
     useEffect(()=>{
         axios.get(baseUrl+"categories/get-categories")
         .then((res)=>setCategories(res.data.data))
@@ -26,7 +28,7 @@ const CategoryBar = () => {
 
       <ul className="flex items-center gap-10 list-none">
             {categories.map((category,i)=>(
-                <li className="text-[.9vw] roboto cursor-pointer  text-black font-normal transition-[all.8s] hover:text-[#00a49f]" key={i}>{category.title}</li>
+                <li onClick={()=>getData(category.title)} className="text-[.9vw] roboto cursor-pointer  text-black font-normal transition-[all.8s] hover:text-[#00a49f]" key={i}>{category.title}</li>
             ))}
       </ul>
     </div>

@@ -21,12 +21,14 @@ import { IoMdHeartEmpty } from "react-icons/io";
 import { notification } from "antd";
 import moment from "moment";
 import Avatar from "../../images/default_avatar.webp";
+import { LoginContext } from "../../contexts/Login/LoginContext";
 
 const SingleProductPage = () => {
   const location = JSON.parse(localStorage.getItem("location"));
 
   const [products, setProducts] = useState({});
-  
+
+  const{isLoggedIn}=useContext(LoginContext)
 
   const { _id } = useParams();
   const { user } = useContext(UserContext);
@@ -37,6 +39,7 @@ const SingleProductPage = () => {
     axios
       .get(`${baseUrl}products/get-products/${_id}`)
       .then((res) => {
+        console.log(res.data)
         setProducts(res.data.data);
         // setPath(res.data.filepath)
       })
@@ -46,7 +49,7 @@ const SingleProductPage = () => {
 
   
 
-  // console.log("first", products.userId);
+  // console.log("first", user);
 
 
   const addFav = (user, product) => {
@@ -145,7 +148,7 @@ const SingleProductPage = () => {
                 ₹{products.price}
               </h1>
               <div
-                onClick={() => addFav(user._id, _id)}
+                onClick={() => {isLoggedIn?addFav(user._id, _id):notification.error({message:"Please login to add to favourites"})}}
                 className="p-2   cursor-pointer bg-white z-[9] rounded-full"
               >
                 <div className="text-2xl">

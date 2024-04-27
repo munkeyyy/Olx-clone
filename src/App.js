@@ -12,31 +12,35 @@ import EditProfile from "./Components/EditProfile/EditProfile";
 import SearchProvider from "./contexts/Search/SearchProvider";
 import Favourites from "./Components/Favourites/Favourites";
 import SingleProductPage from "./Components/SingleProduct/SingleProductPage";
+import Post from "./Components/Post/Post";
+import ProductDetail from "./Components/Post/ProductDetail";
 function App() {
   return (
     <UserProvider>
       <SearchProvider>
-        <div className="App">
-          <LogInProvider>
+        <LogInProvider>
+          <div className="App">
             <NavBar />
-          </LogInProvider>
             <CategoryBar />
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <div>
-                  <ProductList />
-                </div>
-              }
-            />
-            <Route path="/single_page/:_id" element={<SingleProductPage/>} />
-            <Route path="/editprofile" element={<EditProfile />} />
-            <Route path="/profile" element={<ProfilePage/>} />
-            <Route path="/my-favourites" element={<Favourites/>} />
-          </Routes>
-          <Footer />
-        </div>
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <div>
+                    <ProductList />
+                  </div>
+                }
+              />
+              <Route path="/single_page/:_id" element={<SingleProductPage />} />
+              <Route path="/editprofile" element={<EditProfile />} />
+              <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/my-favourites" element={<Favourites />} />
+              <Route path="/post" element={<Post/>} />
+              <Route path="/attributes/:id" element={<ProductDetail/>} />
+            </Routes>
+            <Footer />
+          </div>
+        </LogInProvider>
       </SearchProvider>
     </UserProvider>
   );
