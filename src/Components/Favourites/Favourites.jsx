@@ -16,7 +16,7 @@ const Favourites = () => {
     axios
       .get(`${baseUrl}favourites/get-fav/${user._id}`)
       .then((res) => {
-        console.log(res.data.data);
+        // console.log(res.data.data);
         setFavData(res.data.data);
       })
       .catch((err) => console.log(err));
@@ -48,7 +48,7 @@ const Favourites = () => {
                   </div>
                 </div>
                 <div
-                  onClick={() => navigate(`/singleproduct/${fav.productId}`)}
+                  onClick={() => navigate(`/single_page/${fav.productId}`)}
                 >
                   <ProductCard
                     title={fav.title}

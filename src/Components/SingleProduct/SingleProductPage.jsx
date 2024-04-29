@@ -32,14 +32,14 @@ const SingleProductPage = () => {
 
   const { _id } = useParams();
   const { user } = useContext(UserContext);
-  console.log(location)
+  // console.log(location)
 
 
   useEffect(() => {
     axios
       .get(`${baseUrl}products/get-products/${_id}`)
       .then((res) => {
-        console.log(res.data)
+        // console.log("data",res.data)
         setProducts(res.data.data);
         // setPath(res.data.filepath)
       })
@@ -47,7 +47,7 @@ const SingleProductPage = () => {
   }, []);
 
 
-  
+  // console.log(products)
 
   // console.log("first", user);
 
@@ -106,7 +106,7 @@ const SingleProductPage = () => {
 
                     return (
                       <SwiperSlide key={i}>
-                        <div className="w-[26vw] bg-white mx-auto">
+                        <div className="w-[26vw] h-[26vw] bg-white mx-auto">
                           <img
                             src={`http://localhost:8001/uploads/product/${elem}`}
                             className="h-full self-center object-center w-full object-cover"
@@ -164,19 +164,19 @@ const SingleProductPage = () => {
           </div>
           <div className="border-2 mt-2 p-3  bg-white rounded-md">
             <div className="flex items-center justify-start gap-3">
-              <div className="profile-image w-20 h-20 overflow-clip rounded-full">
+              <div className="profile-image w-16 h-16 overflow-clip rounded-full">
                 <img
                   src={
-                    user.avatar
-                      ? `http://localhost:8001/uploads/users/${user.avatar}`
+                    products?.userId?.avatar
+                      ? `http://localhost:8001/uploads/users/${products?.userId?.avatar}`
                       : Avatar
                   }
                   className="object-cover h-full w-full"
                   alt=""
                 />
               </div>
-              <h1 className="text-2xl roboto font-bold uppercase">
-                {user.user_name}
+              <h1 className="text-xl roboto font-bold uppercase">
+                {products?.userId?.user_name}
               </h1>
             </div>
             <div className="mt-3 capitalize">{products.title}</div>

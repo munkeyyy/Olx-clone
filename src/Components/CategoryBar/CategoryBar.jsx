@@ -15,7 +15,7 @@ const CategoryBar = () => {
         .catch((err)=>console.log(err))
     },[])
   return (
-    <div className=" relative flex gap-8 justify-start py-1 px-32 shadow">
+    <div className=" relative flex gap-8 justify-start py-1 lg:px-8 xl:px-32 shadow">
       <button onClick={()=>{setIsRotating(!isRotating)}} className="flex roboto items-center  gap-2 text-[1vw] font-bold uppercase">
         All Categories
         <span className={`transition-[all.5s] ${isRotating?"rotate-180":"rotate-0"}`}>

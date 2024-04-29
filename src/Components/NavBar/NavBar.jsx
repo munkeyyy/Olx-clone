@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Select, Space, Popover, Modal } from "antd";
+import { Select, Space, Popover, Modal, notification } from "antd";
 import Logo from "../Logo";
 import { IoChevronDownOutline, IoSearchSharp } from "react-icons/io5";
 import { FaPlus } from "react-icons/fa";
@@ -113,7 +113,7 @@ const NavBar = () => {
                       className="text-black roboto flex justify-center gap-2  w-[22vw]"
                       key={i}
                     >
-                      <span className="inline-flex">{elem.address_line1},{elem.city},{elem.country}</span>
+                      <span className="inline-flex">{elem.neighbourhood},{elem.city},{elem.state}</span>
                       
                     </div>
                   );
@@ -161,7 +161,7 @@ const NavBar = () => {
             <LogIn setIsModalOpen={setIsModalOpen} />
           )}
         </Modal>
-        <button className="relative roboto font-medium uppercase">
+        <button onClick={()=>{isLoggedIn?navigate("/post"):notification.error({message:"Please log in first"})}} className="relative roboto font-medium uppercase">
           <svg
             width="104"
             height="48"

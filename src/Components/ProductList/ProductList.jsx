@@ -15,7 +15,7 @@ const ProductList = () => {
   const navigate = useNavigate();
 
   const singleHand = (id) => {
-    console.log("hjvvcdv", id);
+    // console.log("hjvvcdv", id);
     navigate(`/single_page/${id}`);
   };
 

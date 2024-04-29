@@ -11,9 +11,12 @@ const SearchProvider = ({ children }) => {
     axios
       .get(`${baseUrl}products/get-products?search=${val}`)
       .then((res) => {
-        console.log(res.data.data);
+        // console.log(res.data.data);
         setSearch(res.data.data);
         setLoading(false)
+    // window.location.reload()
+        
+
       })
       .catch((err) => console.log(err));
   };

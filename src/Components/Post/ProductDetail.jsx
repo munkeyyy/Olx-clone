@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { baseUrl } from "../../utils";
 import { Formik } from "formik";
@@ -7,21 +7,31 @@ import { notification } from "antd";
 import { FaPencil } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
+import { UserContext } from "../../contexts/User/UserContext";
 
 const ProductDetail = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [selectedCat, setSelectedCat] = useState({});
+  const [selectedSubCat, setSelectedSubCat] = useState("");
+  const [brandsData, setBrandsData] = useState([]);
+  const { user } = useContext(UserContext);
+  const imgRef = useRef();
+  // const [subcat, setSubcat]=useState(null)
   const [pictures, setPictures] = useState([]);
+  const userLocation = JSON.parse(localStorage.getItem("location"));
   useEffect(() => {
     axios
       .get(`${baseUrl}categories/get-categories/${id}`)
       .then((res) => {
-        console.log(res.data.data);
+        // console.log(res.data.data);
+        // setSubcat(selectedCat.subcategory)
         setSelectedCat(res.data.data);
       })
       .catch((err) => console.log(err));
   }, []);
+  // console.log(subcat)
+  // console.log("sub ", selectedCat.subcategory);
 
   const fileChange = (e, handleChange) => {
     const files = e.target.files;
@@ -45,6 +55,19 @@ const ProductDetail = () => {
     updatedPictures.splice(index, 1);
     setPictures(updatedPictures);
   };
+  const handleSubChange = (e, handleChange) => {
+    // console.log("HEHJK", e.target);
+    setSelectedSubCat(e.target.value);
+    const filteredBrand = selectedCat?.subcategory.filter(
+      (sub) => sub.title === e.target.value
+    )[0]?.brand;
+    // console.log("filtered", filteredBrand);
+    setBrandsData(filteredBrand);
+    handleChange(e);
+  };
+  // console.log(selectedSubCat);
+  const location = `${userLocation.neighbourhood}, ${userLocation.city}, ${userLocation.state}`;
+
   return (
     <div className="max-w-[1280px] mx-auto p-4  flex items-start justify-center gap-4">
       <div className="mt-8">
@@ -57,7 +80,7 @@ const ProductDetail = () => {
               Selected category
             </h2>
             <div className="mt-6 flex items-center gap-4">
-              <p className="text-xs text-gray-400 font-medium">{`${selectedCat.title} /`}</p>
+              <p className="text-xs text-gray-400 font-medium">{`${selectedCat.title} / ${selectedSubCat}`}</p>
               <p
                 onClick={() => navigate("/post")}
                 className="text-black underline font-semibold cursor-pointer underline-offset-4 capitalize text-sm"
@@ -72,23 +95,24 @@ const ProductDetail = () => {
                 title: "",
                 description: "",
                 price: "",
-                location: "",
-                category: "",
+                location: location,
+                category: id,
                 subcategory: "",
+                brand: "",
                 images: [],
-                userId: "",
+                userId: user._id,
               }}
               validate={(values) => {
                 const errors = {};
                 if (!values.title) {
                   errors.title = "Title is Required";
-                } else if (values.title.length < 70) {
+                } else if (values.title.length > 70) {
                   errors.title = "Title cannot exceed more than  70 characters";
                 }
 
                 if (!values.description) {
                   errors.description = "description is required";
-                } else if (values.description < 4096) {
+                } else if (values.description > 4096) {
                   errors.description =
                     "description cannot exceed more than  4096 characters";
                 }
@@ -113,25 +137,50 @@ const ProductDetail = () => {
                 return errors;
               }}
               onSubmit={(values) => {
-                console.log(values);
-                axios
-                  .post(`${baseUrl}products/add-products`, {
-                    email: values.email,
-                    password: values.password,
-                  })
-                  .then((res) => {
-                    console.log(res.data.data);
-                    notification.success({
-                      message: res.data.message,
-                    });
-                    localStorage.setItem("token", res.data.token);
-                    localStorage.setItem("user", JSON.stringify(res.data.data));
+                
+                try {
+                  console.log(values);
+                  const formData = new FormData();
+                  formData.append("title", values.title);
+                  formData.append("description", values.description);
+                  formData.append("price", values.price);
+                  formData.append("category", id);
+                  formData.append("brand", values.brand);
+                  formData.append("userId", user._id);
+                  console.log( "location",
+                  `${location.neighbourhood}, ${location.city}, ${location.state}`)
+                  formData.append(
+                    "location",location
+                  );
+                  formData.append("subcategory", selectedSubCat);
+                  const filesdata = imgRef.current.files;
+                  for (let i = 0; i < filesdata.length; i++) {
+                    const element = filesdata[i];
 
-                    navigate("/");
-                  })
-                  .catch((err) => {
-                    notification.error({ message: err.response.data.message });
-                  });
+                    formData.append("images", element);
+                  }
+
+                  axios
+                    .post(`${baseUrl}products/add-product`, formData, {
+                      headers: {
+                        "Content-Type": "multipart/form-data",
+                      },
+                    })
+                    .then((res) => {
+                      // console.log(res.data.data);
+                      notification.success({
+                        message: res.data.message,
+                      });
+                      navigate("/")
+                    })
+                    .catch((err) => {
+                      notification.error({
+                        message: err,
+                      });
+                    });
+                } catch (error) {
+                  console.log(error);
+                }
               }}
             >
               {({
@@ -151,6 +200,63 @@ const ProductDetail = () => {
                         Include some deatils
                       </h2>
                       <div className="flex flex-col mt-3 gap-3">
+                        <div className="flex flex-col gap-2 my-2">
+                          <label className="text-black text-xs  font-medium">
+                            subcategory*
+                          </label>
+                          <select
+                            name="subcategory"
+                            className="border-gray-500 border px-2 py-3 rounded-md focus-visible:outline-none focus-visible:border-2 focus-visible:border-black"
+                            onChange={(e) => handleSubChange(e, handleChange)}
+                            onBlur={handleBlur}
+                            value={values.subcategory}
+                            id="sel1"
+                          >
+                            <option value="select subcategory">
+                              select subcategory
+                            </option>
+                            {selectedCat?.subcategory &&
+                              selectedCat.subcategory.map((sub, i) => (
+                                <option key={i} value={sub.title}>
+                                  {sub.title}
+                                </option>
+                              ))}
+                          </select>
+                          <span className="text-red-600 text-[.8vw] text-center">
+                            {errors.subcategory &&
+                              touched.subcategory &&
+                              errors.subcategory}
+                          </span>
+                        </div>
+                        {brandsData && (
+                          <div className="flex flex-col gap-2 my-2">
+                            {/* {console.log(selectedCat.subcategory)} */}
+                            <label className="text-black txext-xs  font-medium">
+                              Brand*
+                            </label>
+                            <select
+                              name="brand"
+                              className="border-gray-500 border px-2 py-3 rounded-md focus-visible:outline-none focus-visible:border-2 focus-visible:border-black"
+                              onChange={handleChange}
+                              onBlur={handleBlur}
+                              value={values.brand}
+                            >
+                              <option value="">Select Brand</option>
+                              {brandsData &&
+                                brandsData?.map((elem, j) => {
+                                  // console.log("barnd", elem?.brand);
+                                  return (
+                                    <option key={j} value={elem?.title}>
+                                      {elem?.title}
+                                    </option>
+                                  );
+                                })}
+                            </select>
+                            <span className="text-red-600 text-[.8vw] text-center">
+                              {errors.brand && touched.brand && errors.brand}
+                            </span>
+                          </div>
+                        )}
                         <div className="flex flex-col gap-2 my-2">
                           <label className="text-black text-xs  font-medium">
                             Add Title*
@@ -223,47 +329,82 @@ const ProductDetail = () => {
                       </div>
                     </div>
                   </div>
+
                   <div className="border-b border-gray-400">
                     <div className="w-[600px] p-6">
                       <h2 className="text-lg font-bold text-black uppercase">
                         Upload up to 12 photos
                       </h2>
                       <div className="flex flex-wrap gap-4 mt-3">
-                        {Array.from(Array(12).keys()).map((index) => (
+                        {pictures.map((picture, index) => (
+                          <div key={index} className="relative">
+                            <div className="w-20 h-20 bg-white border border-gray-400 flex justify-center items-center relative">
+                              <img
+                                src={picture}
+                                alt={`Image ${index + 1}`}
+                                className="h-full object-cover w-full"
+                              />
+                              <button
+                                type="button"
+                                className="absolute top-0 right-0 bg-red-500 text-white rounded-full w-6 h-6 flex justify-center items-center -mt-1 -mr-1"
+                                onClick={() => handleDeleteImage(index)}
+                              >
+                                <MdDeleteOutline />
+                              </button>
+                            </div>
+                          </div>
+                        ))}
+                        {pictures.length < 12 && (
                           <label
-                            key={index}
-                            htmlFor={`image-upload-${index}`}
+                            htmlFor="image-upload"
                             className="relative cursor-pointer"
                           >
-                            <div className="w-20 h-20 bg-white border  border-gray-400 flex justify-center items-center">
-                              {pictures[index] ? (
-                                <div className="relative h-full w-full">
-                                  <img
-                                    src={pictures[index]}
-                                    alt={`Image ${index + 1}`}
-                                    className="object-cover h-full w-full"
-                                  />
-                                  <div onClick={()=>handleDeleteImage(index)} className=" absolute top-1 right-1 p-0.5 flex items-center justify-center rounded-full bg-red-500 text-white">
-                                    <MdDeleteOutline />
-                                  </div>
-                                </div>
-                              ) : (
-                                <FaPlus className="text-gray-500 text-xl" />
-                              )}
+                            <div className="w-20 h-20 bg-white border border-gray-400 flex justify-center items-center">
+                              <FaPlus className="text-gray-900 text-xl" />
                             </div>
                             <input
-                              id={`image-upload-${index}`}
+                              id="image-upload"
                               type="file"
                               name="images"
                               accept="image/*"
                               multiple
+                              ref={imgRef}
                               className="hidden"
                               onChange={(e) => fileChange(e, handleChange)}
                             />
                           </label>
-                        ))}
+                        )}
                       </div>
                     </div>
+                  </div>
+                  <div className="border-b border-gray-400">
+                    <div className="w-[600px] p-6">
+                      <h2 className="text-lg font-bold text-black uppercase">
+                        Your Location
+                      </h2>
+                      <div className="mt-4">
+                        <div className="flex items-center  my-6 border-t pt-4 justify-between">
+                          <span className="text-gray-500">State</span>
+                          <span>{userLocation.state}</span>
+                        </div>
+                        <div className="flex items-center  my-6 border-t pt-4 justify-between">
+                          <span className="text-gray-500">City</span>
+                          <span>{userLocation.city}</span>
+                        </div>
+                        <div className="flex items-center  my-6 border-t pt-4 justify-between">
+                          <span className="text-gray-500">Neighbourhood</span>
+                          <span>{userLocation.neighbourhood}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="my-4 px-6">
+                    <button
+                      type="submit"
+                      className="px-6 rounded py-2 bg-black text-white"
+                    >
+                      Post
+                    </button>
                   </div>
                 </form>
               )}
