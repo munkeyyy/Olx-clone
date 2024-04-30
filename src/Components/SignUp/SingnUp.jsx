@@ -136,7 +136,7 @@ const SingnUp = ({ setIsSignedUp }) => {
           </form>
         )}
       </Formik>
-      <div onClick={()=>setIsSignedUp(false)} className="text-black mt-4 font-semibold underline cursor-pointer  text-[1vw]">
+      <div onClick={()=>setIsSignedUp(true)} className="text-black mt-4 font-semibold underline cursor-pointer  text-[1vw]">
         Already a User? <span className="underline-offset-1 text-[#00a49f]">log in</span>
       </div>
     </div>

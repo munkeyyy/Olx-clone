@@ -33,7 +33,7 @@ function App() {
               />
               <Route path="/single_page/:_id" element={<SingleProductPage />} />
               <Route path="/editprofile" element={<EditProfile />} />
-              <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/profile/:user_id" element={<ProfilePage />} />
               <Route path="/my-favourites" element={<Favourites />} />
               <Route path="/post" element={<Post/>} />
               <Route path="/attributes/:id" element={<ProductDetail/>} />

@@ -151,14 +151,15 @@ const NavBar = () => {
           </div>
         )}
         <Modal
-          title={isSignedUp ? "Sign Up" : "Log In"}
+          title={isSignedUp ? "Log In" : "Sign UP"}
           open={isModalOpen}
           onCancel={() => setIsModalOpen(false)}
         >
           {isSignedUp ? (
-            <SingnUp setIsSignedUp={setIsSignedUp} />
+            <LogIn setIsModalOpen={setIsModalOpen} setIsSignedUp={setIsSignedUp} />
           ) : (
-            <LogIn setIsModalOpen={setIsModalOpen} />
+            <SingnUp setIsSignedUp={setIsSignedUp} />
+
           )}
         </Modal>
         <button onClick={()=>{isLoggedIn?navigate("/post"):notification.error({message:"Please log in first"})}} className="relative roboto font-medium uppercase">

@@ -65,6 +65,7 @@ const ProductDetail = () => {
     setBrandsData(filteredBrand);
     handleChange(e);
   };
+  console.log(brandsData)
   // console.log(selectedSubCat);
   const location = `${userLocation.neighbourhood}, ${userLocation.city}, ${userLocation.state}`;
 
@@ -98,7 +99,7 @@ const ProductDetail = () => {
                 location: location,
                 category: id,
                 subcategory: "",
-                brand: "",
+                brand: brandsData.length!==0?"" :null,
                 images: [],
                 userId: user._id,
               }}
@@ -127,8 +128,11 @@ const ProductDetail = () => {
                 if (!values.subcategory) {
                   errors.subcategory = "Please select a subcategory";
                 }
-                if (!values.brand) {
-                  errors.brand = "Please select a brand";
+                if(brandsData.length!==0){
+
+                  if (!values.brand) {
+                    errors.brand = "Please select a brand";
+                  }
                 }
                 if (!values.images) {
                   errors.images = "this field is mandatory";
@@ -228,7 +232,7 @@ const ProductDetail = () => {
                               errors.subcategory}
                           </span>
                         </div>
-                        {brandsData && (
+                        {brandsData.length!==0 && (
                           <div className="flex flex-col gap-2 my-2">
                             {/* {console.log(selectedCat.subcategory)} */}
                             <label className="text-black txext-xs  font-medium">
@@ -237,7 +241,10 @@ const ProductDetail = () => {
                             <select
                               name="brand"
                               className="border-gray-500 border px-2 py-3 rounded-md focus-visible:outline-none focus-visible:border-2 focus-visible:border-black"
-                              onChange={handleChange}
+                              onChange={(e) => {
+                                handleChange(e);
+                                values.brand = e.target.value; // Update the value manually
+                              }}
                               onBlur={handleBlur}
                               value={values.brand}
                             >

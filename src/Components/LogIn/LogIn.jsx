@@ -6,7 +6,7 @@ import { notification } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
 import { LoginContext } from "../../contexts/Login/LoginContext";
 import { UserContext } from "../../contexts/User/UserContext";
-const LogIn = ({ setIsModalOpen }) => {
+const LogIn = ({ setIsModalOpen, setIsSignedUp }) => {
   const navigate = useNavigate();
 
   const { setIsLoggedIn } = useContext(LoginContext);
@@ -110,6 +110,9 @@ const LogIn = ({ setIsModalOpen }) => {
           </form>
         )}
       </Formik>
+      <div  className="text-black mt-4 font-semibold underline cursor-pointer  text-[1vw]">
+        Don't Have An Account? <span onClick={()=>setIsSignedUp(false)} className="underline-offset-1 text-[#00a49f]">Signup</span>
+      </div>
     </div>
   );
 };

@@ -8,7 +8,7 @@ const ProductCard = ({title, price, location, day, thumbnail}) => {
         </div>
         <div>
             <h1 className='text-black roboto font-medium text-[1.2vw]'>₹ {price}</h1>
-            <p className='text-gray-500 roboto text-[1.06vw]  capitalize'>{title}</p>
+            <p className='text-gray-500 roboto text-[1.06vw]  capitalize'>{title.length > 33 ? `${title.slice(0, 33)}...` : title}</p>
             <div className='text-gray-500 roboto uppercase flex items-center font-medium mt-4 justify-between'>
                 <span className='text-[.7vw]'>{location}</span>
                 <span className='text-[.7vw]'>{day}</span>

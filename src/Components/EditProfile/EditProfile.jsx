@@ -20,7 +20,7 @@ const EditProfile = () => {
   const imgRef = useRef();
   const navigate = useNavigate();
   const fileChange = (e, handleChange) => {
-    console.log(e.target.file);
+    console.log(e.target.files);
     setImg(URL.createObjectURL(e.target.files[0]));
     handleChange(e);
   };
@@ -40,7 +40,7 @@ const EditProfile = () => {
 
         <button
           onClick={() => {
-            navigate("/profile");
+            navigate(`/profile/${user._id}`);
           }}
           className="text-black mt-3 bg-white border-[3px] border-black py-2 px-4 rounded-md roboto font-medium w-full capitalize"
         >
@@ -154,7 +154,7 @@ const EditProfile = () => {
                             <div className="flex  flex-col  items-start justify-center">
                               <div className="w-[10vw] relative h-[10vw] rounded-full  overflow-clip">
                                 <img
-                                  src={img?img:values.avatar}
+                                  src={img?img:values.avatar?values.avatar:Avatar}
                                   className="rounded-full h-full w-full object-center object-cover"
                                   alt="avatar"
                                 />

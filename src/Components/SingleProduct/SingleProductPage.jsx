@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { baseUrl } from "../../utils";
 import axios from "axios";
 import {
@@ -22,18 +22,19 @@ import { notification } from "antd";
 import moment from "moment";
 import Avatar from "../../images/default_avatar.webp";
 import { LoginContext } from "../../contexts/Login/LoginContext";
+import { FaPhoneAlt } from "react-icons/fa";
 
 const SingleProductPage = () => {
+  const navigate = useNavigate();
   const location = JSON.parse(localStorage.getItem("location"));
 
   const [products, setProducts] = useState({});
 
-  const{isLoggedIn}=useContext(LoginContext)
+  const { isLoggedIn } = useContext(LoginContext);
 
   const { _id } = useParams();
   const { user } = useContext(UserContext);
   // console.log(location)
-
 
   useEffect(() => {
     axios
@@ -46,11 +47,9 @@ const SingleProductPage = () => {
       .catch((err) => console.log(err));
   }, []);
 
-
   // console.log(products)
 
   // console.log("first", user);
-
 
   const addFav = (user, product) => {
     axios
@@ -67,7 +66,7 @@ const SingleProductPage = () => {
 
   return (
     <div className="bg-[rgba(242,244,245,1)]">
-      <div className="max-w-[1280px] mx-auto p-4  flex items-start justify-start gap-4">
+      <div className="max-w-[1280px] mx-auto p-4 relative flex items-start justify-start gap-4">
         <div className="overflow-x-clip w-[70%]  ">
           <div className="bg-black p-2 rounded-lg">
             <div className="flex items-center justify-center">
@@ -120,7 +119,7 @@ const SingleProductPage = () => {
             </div>
           </div>
           <div className="p-3 mt-4 shadow-md bg-white rounded-md border-2">
-            {products.brand && (
+            {products.brand!==null && (
               <div className="pb-2 border-b-2">
                 <h1 className="text-black font-bold text-[1.2vw]">Details</h1>
 
@@ -128,7 +127,7 @@ const SingleProductPage = () => {
                   <h3 className="text-[1vw] font-normal roboto text-gray-400">
                     Brand
                   </h3>
-                  <h3 className="text-[1vw] font-normal roboto text-gray-400">
+                  <h3 className="text-[1vw] font-medium roboto text-gray-400">
                     {products.brand}
                   </h3>
                 </div>
@@ -141,14 +140,20 @@ const SingleProductPage = () => {
           </div>
         </div>
 
-        <div className="w-[30%]">
+        <div className="w-[30%] sticky top-[0%]">
           <div className="border-2 p-3  bg-white rounded-md">
             <div className="flex items-center justify-between">
               <h1 className="text-[2.2vw] font-bold roboto">
                 ₹{products.price}
               </h1>
               <div
-                onClick={() => {isLoggedIn?addFav(user._id, _id):notification.error({message:"Please login to add to favourites"})}}
+                onClick={() => {
+                  isLoggedIn
+                    ? addFav(user._id, _id)
+                    : notification.error({
+                        message: "Please login to add to favourites",
+                      });
+                }}
                 className="p-2   cursor-pointer bg-white z-[9] rounded-full"
               >
                 <div className="text-2xl">
@@ -163,7 +168,10 @@ const SingleProductPage = () => {
             </div>
           </div>
           <div className="border-2 mt-2 p-3  bg-white rounded-md">
-            <div className="flex items-center justify-start gap-3">
+            <div
+              onClick={() => navigate(`/profile/${products?.userId?._id}`)}
+              className="flex cursor-pointer items-center justify-start gap-3"
+            >
               <div className="profile-image w-16 h-16 overflow-clip rounded-full">
                 <img
                   src={
@@ -179,20 +187,30 @@ const SingleProductPage = () => {
                 {products?.userId?.user_name}
               </h1>
             </div>
-            <div className="mt-3 capitalize">{products.title}</div>
+            <div className="mt-3 capitalize flex items-center justify-center p-3 border-2 transition-[all.8s] active:scale-[.9] cursor-pointer border-black rounded-md gap-3">
+              <div>
+                <FaPhoneAlt />
+              </div>
+              <a
+                className="black font-semibold"
+                href={`tel:${products?.userId?.phone} `}
+              >
+                Take A call
+              </a>
+            </div>
           </div>
           <div className="border-2 mt-2 p-3  bg-white rounded-md">
             <h1 className="text-[1.2vw] font-bold roboto text-balck">
               Posted In
             </h1>
             <p className="text-gray-500 mt-6 font-medium">
-              {products.location}
+              {products?.location}
             </p>
           </div>
           <div className="border-2 mt-2 p-3 h-[350px]  bg-white rounded-md">
             <iframe
               className="w-full h-full"
-              src={`https://maps.google.com/maps?q=${location.lat},${location.lon}&hl=es;z=14&amp&output=embed`}
+              src={`https://maps.google.com/maps?q=${location?.lat},${location?.lon}&hl=es;z=14&amp&output=embed`}
             ></iframe>
           </div>
         </div>
