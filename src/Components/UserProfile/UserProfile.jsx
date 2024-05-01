@@ -24,7 +24,7 @@ const UserProfile = () => {
         <img
           src={
             user.avatar
-              ? `http://localhost:8001/uploads/users/${user.avatar}`
+              ? `https://olx-backend-pexw.onrender.com/uploads/users/${user.avatar}`
               : Avatar
           }
           className="object-cover h-full w-full"
@@ -42,7 +42,7 @@ const UserProfile = () => {
               <img
                 src={
                   user.avatar
-                    ? `http://localhost:8001/uploads/users/${user.avatar}`
+                    ? `https://olx-backend-pexw.onrender.com/uploads/users/${user.avatar}`
                     : Avatar
                 }
                 className="object-cover h-full w-full"

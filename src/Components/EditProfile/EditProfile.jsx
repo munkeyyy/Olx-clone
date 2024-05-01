@@ -56,7 +56,7 @@ const EditProfile = () => {
             initialValues={{
               user_name: user.user_name,
               email: user.email,
-              avatar: `http://localhost:8001/uploads/users/${user.avatar}`,
+              avatar: `https://olx-backend-pexw.onrender.com//uploads/users/${user.avatar}`,
               phone: user.phone,
             }}
             validate={(values) => {

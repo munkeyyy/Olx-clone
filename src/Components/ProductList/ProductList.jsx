@@ -61,7 +61,7 @@ const ProductList = () => {
                           location={product.location}
                           day={product.day}
                           thumbnail={
-                            "http://localhost:8001/uploads/product/" +
+                            "https://olx-backend-pexw.onrender.com/uploads/product/" +
                             product.thumbnail
                           }
                         />

@@ -107,7 +107,7 @@ const SingleProductPage = () => {
                       <SwiperSlide key={i}>
                         <div className="w-[26vw] h-[26vw] bg-white mx-auto">
                           <img
-                            src={`http://localhost:8001/uploads/product/${elem}`}
+                            src={`https://olx-backend-pexw.onrender.com/uploads/product/${elem}`}
                             className="h-full self-center object-center w-full object-cover"
                             alt="img"
                           />
@@ -176,7 +176,7 @@ const SingleProductPage = () => {
                 <img
                   src={
                     products?.userId?.avatar
-                      ? `http://localhost:8001/uploads/users/${products?.userId?.avatar}`
+                      ? `https://olx-backend-pexw.onrender.com/uploads/users/${products?.userId?.avatar}`
                       : Avatar
                   }
                   className="object-cover h-full w-full"

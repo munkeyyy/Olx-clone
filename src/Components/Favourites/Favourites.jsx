@@ -56,7 +56,7 @@ const Favourites = () => {
                     price={fav.price}
                     day={moment(fav.created_at).format("Do MMM YYYY")}
                     thumbnail={
-                      "http://localhost:8001/uploads/product/" + fav.image
+                      "https://olx-backend-pexw.onrender.com/uploads/product/" + fav.image
                     }
                   />
                 </div>

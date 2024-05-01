@@ -51,7 +51,7 @@ const ProfilePage = () => {
             <img
               src={
                 userInfo.avatar
-                  ? `http://localhost:8001/uploads/users/${
+                  ? `https://olx-backend-pexw.onrender.com/uploads/users/${
                       userInfo.avatar ? userInfo.avatar : user.avatar
                     }`
                   : Avatar
@@ -135,7 +135,7 @@ const ProfilePage = () => {
                           price={post.price}
                           day={moment(post.created_at).format("Do MMM YYYY")}
                           thumbnail={
-                            "http://localhost:8001/uploads/product/" +
+                            "https://olx-backend-pexw.onrender.com/uploads/product/" +
                             post.thumbnail
                           }
                         />
