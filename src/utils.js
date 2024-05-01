@@ -1,1 +1,1 @@
-export const baseUrl="http://localhost:8001/api/v1/"
+export const baseUrl="https://olx-backend-pexw.onrender.com/api/v1/"
