@@ -152,7 +152,7 @@ const ProductDetail = () => {
                   formData.append("brand", values.brand);
                   formData.append("userId", user._id);
                   console.log( "location",
-                  `${location.neighbourhood}, ${location.city}, ${location.state}`)
+                  `${location?.neighbourhood}, ${location?.city}, ${location?.state}`)
                   formData.append(
                     "location",location
                   );

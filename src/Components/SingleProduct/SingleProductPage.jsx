@@ -119,7 +119,7 @@ const SingleProductPage = () => {
             </div>
           </div>
           <div className="p-3 mt-4 shadow-md bg-white rounded-md border-2">
-            {products.brand!==null && (
+            {products.brand !== null && (
               <div className="pb-2 border-b-2">
                 <h1 className="text-black font-bold text-[1.2vw]">Details</h1>
 
@@ -179,6 +179,10 @@ const SingleProductPage = () => {
                       ? `https://olx-backend-pexw.onrender.com/uploads/users/${products?.userId?.avatar}`
                       : Avatar
                   }
+                  onError={(e) => {
+                    e.currentTarget.src =
+                      "https://olx-backend-pexw.onrender.com/uploads/product/image%20(9)-1714453287058.jpg";
+                  }}
                   className="object-cover h-full w-full"
                   alt=""
                 />
