@@ -107,6 +107,10 @@ const SingleProductPage = () => {
                       <SwiperSlide key={i}>
                         <div className="w-[26vw] h-[26vw] bg-white mx-auto">
                           <img
+                           onError={(e) => {
+                            e.currentTarget.src =
+                              "https://olx-backend-pexw.onrender.com/uploads/product/image%20(9)-1714453287058.jpg";
+                          }}
                             src={`https://olx-backend-pexw.onrender.com/uploads/product/${elem}`}
                             className="h-full self-center object-center w-full object-cover"
                             alt="img"
@@ -174,15 +178,12 @@ const SingleProductPage = () => {
             >
               <div className="profile-image w-16 h-16 overflow-clip rounded-full">
                 <img
-                  src={
+                  src= {
                     products?.userId?.avatar
                       ? `https://olx-backend-pexw.onrender.com/uploads/users/${products?.userId?.avatar}`
                       : Avatar
                   }
-                  onError={(e) => {
-                    e.currentTarget.src =
-                      "https://olx-backend-pexw.onrender.com/uploads/product/image%20(9)-1714453287058.jpg";
-                  }}
+                 
                   className="object-cover h-full w-full"
                   alt=""
                 />
