@@ -9,6 +9,7 @@ const ProductCard = ({ title, price, location, day, thumbnail }) => {
       <div className="image h-[10rem] bg-gray-300 w-full">
        
           <img
+          loading="lazy"
           onError={(e)=>{
             e.currentTarget.src="https://olx-backend-pexw.onrender.com/uploads/product/image%20(9)-1714453287058.jpg"
           }}

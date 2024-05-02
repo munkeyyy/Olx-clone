@@ -22,6 +22,7 @@ const UserProfile = () => {
         className="profile-image w-12 h-12 rounded-full overflow-clip"
       >
         <img
+        loading="eager"
           src={
             user.avatar
               ? `https://olx-backend-pexw.onrender.com/uploads/users/${user.avatar}`

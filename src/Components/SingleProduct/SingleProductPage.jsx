@@ -107,6 +107,7 @@ const SingleProductPage = () => {
                       <SwiperSlide key={i}>
                         <div className="w-[26vw] h-[26vw] bg-white mx-auto">
                           <img
+                          loading="lazy"
                            onError={(e) => {
                             e.currentTarget.src =
                               "https://olx-backend-pexw.onrender.com/uploads/product/image%20(9)-1714453287058.jpg";

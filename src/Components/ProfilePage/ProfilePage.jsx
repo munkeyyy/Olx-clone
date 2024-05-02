@@ -49,6 +49,7 @@ const ProfilePage = () => {
         <div className="flex items-center justify-start">
           <div className="profile-image w-32 h-32 overflow-clip rounded-full">
             <img
+            loading="lazy"
               src={
                 userInfo.avatar
                   ? `https://olx-backend-pexw.onrender.com/uploads/users/${

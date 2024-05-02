@@ -154,6 +154,7 @@ const EditProfile = () => {
                             <div className="flex  flex-col  items-start justify-center">
                               <div className="w-[10vw] relative h-[10vw] rounded-full  overflow-clip">
                                 <img
+                                loading="lazy"
                                   src={img?img:values.avatar?values.avatar:Avatar}
                                   className="rounded-full h-full w-full object-center object-cover"
                                   alt="avatar"

@@ -29,10 +29,14 @@ const NavBar = () => {
   useEffect(() => {
     getLocation();
   }, []);
+  
   // const handleSubmit = (e) => {
   //   e.preventDefault();
   // };
   const { getData,loading, setLoading } = useContext(SearchContext);
+  useEffect(() => {
+    getData();
+  }, []);
 
   const handleLang = () => {
     setIsRotating(!isRotating);
@@ -68,9 +72,7 @@ const NavBar = () => {
   const changeHandler = (e) => {
     getData(e.target.value);
   };
-  useEffect(() => {
-    getData();
-  }, []);
+ 
 
   const googleTranslateElementInit = () => {
     new window.google.translate.TranslateElement(
