@@ -1,1 +1,1 @@
-export const baseUrl="https://olx-backend-pexw.onrender.com/api/v1/"
+export const baseUrl="https://olx-backend-ebon.vercel.app/api/v1/"

@@ -52,7 +52,7 @@ const ProfilePage = () => {
             loading="lazy"
               src={
                 userInfo.avatar
-                  ? `https://olx-backend-pexw.onrender.com/uploads/users/${
+                  ? `https://olx-backend-ebon.vercel.app/uploads/users/${
                       userInfo.avatar ? userInfo.avatar : user.avatar
                     }`
                   : Avatar

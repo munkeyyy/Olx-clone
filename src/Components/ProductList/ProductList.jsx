@@ -65,7 +65,7 @@ const ProductList = () => {
                               location={product.location}
                               day={product.day}
                               thumbnail={
-                                "https://olx-backend-pexw.onrender.com/uploads/product/" +
+                                "https://olx-backend-ebon.vercel.app/uploads/product/" +
                                 product.thumbnail
                               }
                             />
