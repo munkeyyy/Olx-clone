@@ -112,7 +112,7 @@ const SingleProductPage = () => {
                             e.currentTarget.src =
                               "https://olx-backend-pexw.onrender.com/uploads/product/image%20(9)-1714453287058.jpg";
                           }}
-                            src={`https://olx-backend-ebon.vercel.app/uploads/product/${elem}`}
+                            src={`https://olx-backend-pexw.onrender.com/uploads/product/${elem}`}
                             className="h-full self-center object-center w-full object-cover"
                             alt="img"
                           />
@@ -181,7 +181,7 @@ const SingleProductPage = () => {
                 <img
                   src= {
                     products?.userId?.avatar
-                      ? `https://olx-backend-ebon.vercel.app/uploads/users/${products?.userId?.avatar}`
+                      ? `https://olx-backend-pexw.onrender.com/uploads/users/${products?.userId?.avatar}`
                       : Avatar
                   }
                  
