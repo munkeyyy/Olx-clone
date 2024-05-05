@@ -38,11 +38,28 @@ code {
   display: none
 }
 
+.ant-drawer-body{
+  padding: 0px !important;
+}
+
+.ant-drawer-top>.ant-drawer-content-wrapper {
+  height: 400px !important;
+}
 .ant-modal .ant-modal-title {
   text-align: center;
   font-family: "roboto", sans-serif;
   font-size: 2vw;
 }
+
+.ant-notification-notice-wrapper .ant-notification-notice-with-icon .ant-notification-notice-message {
+  font-size: 1.06vw !important;
+}
+@media screen and (max-width:480px) {
+  .ant-notification-notice-wrapper .ant-notification-notice-with-icon .ant-notification-notice-message {
+    font-size: 3vw !important;
+  }
+}
+
 .box-shadow{
   box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
 }

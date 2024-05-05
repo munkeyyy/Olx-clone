@@ -21,7 +21,11 @@ function App() {
         <LogInProvider>
           <div className="App">
             <NavBar />
+            <div className="hidden md:block">
             <CategoryBar />
+
+            </div>
+
             <Routes>
               <Route
                 path="/"

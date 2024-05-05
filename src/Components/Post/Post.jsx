@@ -24,8 +24,8 @@ const Post = () => {
   };
   const navigate=useNavigate()
   return (
-    <div className="max-w-[1280px] mx-auto p-4  flex items-start justify-center gap-4">
-      <div className="mt-12">
+    <div className="max-w-[1280px] mx-auto p-4  flex items-start md:justify-center gap-4">
+      <div className="mt-12 w-full">
         <h1 className="text-center text-black roboto text-3xl my-4 font-bold">
           Add Your Product
         </h1>
@@ -40,12 +40,12 @@ const Post = () => {
             {categories.map((cat, i) => (
               <div className="flex items-start w-full justify-start" key={i}>
                 <div
-                  className={`p-3 border-r border-b text-gray-400 border-gray-400 flex justify-between w-[800px] hover:bg-gray-200  items-center cursor-pointer ${
+                  className={`p-3 border-r border-b text-gray-400 border-gray-400 flex justify-between w-full md:w-[800px] hover:bg-gray-200  items-center cursor-pointer ${
                     selectedCategoryIndex === i ? "bg-gray-200" : ""
                   }`}
                   onClick={() => handleCategoryClick(i,cat._id)}
                 >
-                  <span>{cat.title}</span>{" "}
+                  <span className="text-[4vw] md:text-[1.06vw]">{cat.title}</span>{" "}
                   <div>
                     <FaAngleRight />
                   </div>

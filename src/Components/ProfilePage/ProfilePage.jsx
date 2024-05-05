@@ -44,10 +44,10 @@ const ProfilePage = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="flex items-start realtive p-10 mx-auto my-0 max-w-[1340px]">
-      <div className="w-[25%]">
-        <div className="flex items-center justify-start">
-          <div className="profile-image w-32 h-32 overflow-clip rounded-full">
+    <div className="flex flex-col md:flex-row items-start realtive p-4 md:p-10 mx-auto my-0 max-w-[1340px]">
+      <div className="w-full md:w-[25%]">
+        <div className="flex items-center gap-4 justify-start">
+          <div className="profile-image w-20 h-20 md:w-32 md:h-32 overflow-clip rounded-full">
             <img
             loading="lazy"
               src={
@@ -61,15 +61,20 @@ const ProfilePage = () => {
               alt=""
             />
           </div>
+          <div className="block md:hidden">
+            <p className="text-[6vw] md:text-[1.3vw] font-bold capitalize roboto">
+              {userInfo.user_name ? userInfo.user_name : user.user_name}
+            </p>
+          </div>
         </div>
         <div className="user-info my-2">
-          <div>
+          <div className="hidden md:block">
             <p className="text-[1.3vw] font-bold capitalize roboto">
               {userInfo.user_name ? userInfo.user_name : user.user_name}
             </p>
           </div>
           <div className="flex items-start flex-col gap-4 my-4">
-            <div className="flex items-center gap-2 text-[1vw] roboto font-regular text-[#002f34]">
+            <div className="flex items-center gap-2 text-[5vw] md:text-[1vw] roboto font-regular text-[#002f34]">
               <div>
                 <FaRegCalendarAlt />
               </div>
@@ -80,7 +85,7 @@ const ProfilePage = () => {
                 ).format("Do MMM YYYY")}
               </p>
             </div>
-            <div className="flex items-center gap-2 text-[1vw] roboto font-regular text-[#002f34]">
+            <div className="flex items-center gap-2 text-[5vw] md:text-[1vw] roboto font-regular text-[#002f34]">
               <div>
                 <GiShadowFollower />
               </div>
@@ -108,8 +113,8 @@ const ProfilePage = () => {
           </div>
         </div>
       </div>
-      <div className="w-[75%]">
-        <div className="mx-auto my-0 max-w-[1340px] px-8 py-6">
+      <div className="w-full md:w-[75%]">
+        <div className="mx-auto my-0 max-w-[1340px] md:px-8 py-6">
           <h1 className="text-2xl font-bold roboto">Posts</h1>
           {posts.lenght!==0 ? (
             <div className="flex justify-start gap-4 flex-wrap mt-4">

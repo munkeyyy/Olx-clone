@@ -32,13 +32,13 @@ const Favourites = () => {
       .catch((err) => console.log(err));
   };
   return (
-    <div className="mx-auto my-0 max-w-[1280px] px-8 py-6">
+    <div className="mx-auto my-0 max-w-[1280px] px-4 md:px-8 py-6">
       <h1>My Favorites</h1>
       <div className="flex justify-start gap-4 flex-wrap mt-4">
         {favData && (
           favData.map((fav, i) => {
             return (
-              <div className="relative" key={i}>
+              <div className="relative grow md:grow-0" key={i}>
                 <div
                   onClick={() => deleteFav(fav._id)}
                   className="p-2  absolute right-[10%] top-[8%] cursor-pointer bg-white z-[9] rounded-full"

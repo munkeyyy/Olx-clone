@@ -30,8 +30,8 @@ const EditProfile = () => {
   //   setImg(url)
   // }
   return (
-    <div className="flex items-start gap-6 realtive p-10 mx-auto my-0 max-w-[1280px]">
-      <div className="w-[20%] sticky top-[120px]  ">
+    <div className="flex items-start gap-6 realtive p-0 md:p-10 mx-auto my-0 max-w-[1280px]">
+      <div className="hidden md:block w-[20%] sticky top-[120px]  ">
         <div
           className={`roboto cursor-pointer my-2 text-[1.1vw] font-semibold text-black`}
         >
@@ -47,8 +47,8 @@ const EditProfile = () => {
           view Profile
         </button>
       </div>
-      <div className=" w-[80%] rounded-md border-2 border-[rgba(0,0,0,0.15)]">
-        <div className="p-4">
+      <div className="w-full md:w-[80%] rounded-md md:border-2 border-[rgba(0,0,0,0.15)]">
+        <div className="hidden md:block p-4">
           <h1 className="roboto text-[1.5vw] font-bold">Edit Profile</h1>
         </div>
         <div className="p-4 border-t-2 border-[rgba(0,0,0,0.15)]">
@@ -127,11 +127,11 @@ const EditProfile = () => {
             }) => (
               <form onSubmit={handleSubmit}>
                 <div className="flex flex-col gap-3">
-                  <h2 className="text-[1.2vw] font-semibold">
+                  <h2 className="text-[5vw] md:text-[1.2vw] font-semibold">
                     Basic Information
                   </h2>
-                  <div className="flex justify-start mb-4 items-start gap-6">
-                    <div className="flex flex-col w-1/2 my-2">
+                  <div className="flex justify-start flex-row-reverse md:flex-row mb-1 md:mb-4 items-center md:items-start gap-2 md:gap-6">
+                    <div className="flex flex-col w-full md:w-1/2 my-2">
                       <input
                         type="text"
                         name="user_name"
@@ -147,19 +147,19 @@ const EditProfile = () => {
                           errors.user_name}
                       </span>
                     </div>
-                    <div className="w-1/2 border-l-2 flex items-center gap-4">
-                      <div className="img-upload h-[10vw]">
-                        <label className="flex p-2 justify-start">
+                    <div className="w-full  md:w-1/2 md:border-l-2 flex items-center gap-4">
+                      <div className="img-upload md:h-[10vw]">
+                        <label className="flex   p-2 justify-start">
                           <>
-                            <div className="flex  flex-col  items-start justify-center">
-                              <div className="w-[10vw] relative h-[10vw] rounded-full  overflow-clip">
+                            <div className="flex grow md:grow-0 flex-col  items-start justify-center">
+                              <div className="md:w-[10vw] w-[25vw] grow md:grow-0 relative h-[25vw] md:h-[10vw] rounded-full  overflow-clip">
                                 <img
                                 loading="lazy"
                                   src={img?img:values.avatar?values.avatar:Avatar}
                                   className="rounded-full h-full w-full object-center object-cover"
                                   alt="avatar"
                                 />
-                                <div className="absolute bottom-0 flex justify-center  left-0 bg-[rgba(0,0,0,0.75)] p-4 text-white w-full text-[1.5vw]">
+                                <div className="absolute bottom-0 flex justify-center  left-0 bg-[rgba(0,0,0,0.75)] p-2 md:p-4 text-white w-full text-[4vw] md:text-[1.5vw]">
                                   <FaPencil />
                                 </div>
                               </div>
@@ -179,7 +179,7 @@ const EditProfile = () => {
                           </p>
                         </label>
                       </div>
-                      <div>
+                      <div className="hidden  md:block">
                         <p className="text-gray-400 text-[.8vw]">
                           Clear photos are an important way for buyers and
                           sellers to learn about each other. Be sure doesn’t
@@ -193,12 +193,12 @@ const EditProfile = () => {
                     </div>
                   </div>
                   <div className="py-4 border-t-2">
-                    <h2 className="text-[1.2vw] font-semibold">
+                    <h2 className="text-[5vw] md:text-[1.2vw] font-semibold">
                       Contact Information
                     </h2>
                     <div className="mt-4">
-                      <div className="flex items-center gap-6">
-                        <div className="flex flex-col my-2 w-[25vw]">
+                      <div className="flex flex-col md:flex-row items-start md:items-center gap-1 md:gap-6">
+                        <div className="flex flex-col my-2 w-full md:w-[25vw]">
                           <input
                             type="number"
                             placeholder="phone number"
@@ -212,12 +212,12 @@ const EditProfile = () => {
                             {errors.phone && touched.phone && errors.phone}
                           </span>
                         </div>
-                        <p className="text-[.9vw] font-medium text-gray-400">
+                        <p className="text-[4vw] md:text-[.9vw] font-medium text-gray-400">
                           Your number is verified!
                         </p>
                       </div>
-                      <div className="flex items-center gap-6 ">
-                        <div className="flex flex-col my-2 w-[28vw]">
+                      <div className="flex flex-col md:flex-row items-start md:items-center gap-1 md:gap-6">
+                        <div className="flex flex-col my-2 w-full md:w-[28vw]">
                           <input
                             type="email"
                             name="email"
@@ -231,7 +231,7 @@ const EditProfile = () => {
                             {errors.email && touched.email && errors.email}
                           </span>
                         </div>
-                        <p className="text-[.9vw] font-medium text-gray-400">
+                        <p className="text-[4vw] md:text-[.9vw] font-medium text-gray-400">
                           Your Email is never shared with external parties nor
                           do we use it to spam you in any way
                         </p>
@@ -243,7 +243,7 @@ const EditProfile = () => {
                     type="submit"
                     className="py-2 mx-auto rounded-md px-4 text-center bg-black text-white font-medium"
                   >
-                    post
+                    Post
                   </button>
                 </div>
               </form>

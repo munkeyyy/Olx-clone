@@ -66,9 +66,9 @@ const SingleProductPage = () => {
 
   return (
     <div className="bg-[rgba(242,244,245,1)]">
-      <div className="max-w-[1280px] mx-auto p-4 relative flex items-start justify-start gap-4">
-        <div className="overflow-x-clip w-[70%]  ">
-          <div className="bg-black p-2 rounded-lg">
+      <div className="max-w-[1280px] mx-auto p-4 relative flex flex-col md:flex-row items-start justify-start gap-4">
+        <div className="overflow-x-clip w-full md:w-[70%]  ">
+          <div className="bg-black overflow-clip md:overflow-none  rounded-lg">
             <div className="flex items-center justify-center">
               <Swiper
                 // install Swiper modules
@@ -105,7 +105,7 @@ const SingleProductPage = () => {
 
                     return (
                       <SwiperSlide key={i}>
-                        <div className="w-[26vw] h-[26vw] bg-white mx-auto">
+                        <div className="w-full h-[80vw] md:w-[26vw] md:h-[26vw] bg-white mx-auto">
                           <img
                           loading="lazy"
                            onError={(e) => {
@@ -126,29 +126,29 @@ const SingleProductPage = () => {
           <div className="p-3 mt-4 shadow-md bg-white rounded-md border-2">
             {products.brand !== null && (
               <div className="pb-2 border-b-2">
-                <h1 className="text-black font-bold text-[1.2vw]">Details</h1>
+                <h1 className="text-black font-bold text-[4vw] md:text-[1.2vw]">Details</h1>
 
                 <div className="flex items-center justify-between">
-                  <h3 className="text-[1vw] font-normal roboto text-gray-400">
+                  <h3 className="text-[3.8vw]  md:text-[1vw] font-normal roboto text-gray-400">
                     Brand
                   </h3>
-                  <h3 className="text-[1vw] font-medium roboto text-gray-400">
+                  <h3 className="text-[3.8vw] md:text-[1vw] font-medium roboto text-gray-400">
                     {products.brand}
                   </h3>
                 </div>
               </div>
             )}
             <div className="desc mt-4">
-              <h1 className="text-black font-bold text-[1.2vw]">Description</h1>
+              <h1 className="text-black font-bold text-[4vw] md:text-[1.2vw]">Description</h1>
               <div className="">{products.description}</div>
             </div>
           </div>
         </div>
 
-        <div className="w-[30%] sticky top-[0%]">
+        <div className="w-full md:w-[30%] sticky top-[0%]">
           <div className="border-2 p-3  bg-white rounded-md">
             <div className="flex items-center justify-between">
-              <h1 className="text-[2.2vw] font-bold roboto">
+              <h1 className="text-[5.5vw] md:text-[2.2vw] font-bold roboto">
                 ₹{products.price}
               </h1>
               <div
@@ -167,7 +167,7 @@ const SingleProductPage = () => {
               </div>
             </div>
             <div className="mt-3 capitalize">{products.title}</div>
-            <div className="flex justify-between items-center text-[.8vw] text-gray-400 font-medium mt-4">
+            <div className="flex justify-between items-center text-[3vw] md:text-[.8vw] text-gray-400 font-medium mt-4">
               <p>{products.location}</p>
               <p>{moment(products.day).format("Do,MMM,YYYY")}</p>
             </div>
@@ -206,7 +206,7 @@ const SingleProductPage = () => {
             </div>
           </div>
           <div className="border-2 mt-2 p-3  bg-white rounded-md">
-            <h1 className="text-[1.2vw] font-bold roboto text-balck">
+            <h1 className="text-[4.8vw] md:text-[1.2vw] font-bold roboto text-balck">
               Posted In
             </h1>
             <p className="text-gray-500 mt-6 font-medium">

@@ -70,13 +70,13 @@ const ProductDetail = () => {
   const location = `${userLocation.neighbourhood}, ${userLocation.city}, ${userLocation.state}`;
 
   return (
-    <div className="max-w-[1280px] mx-auto p-4  flex items-start justify-center gap-4">
-      <div className="mt-8">
-        <h1 className="text-center text-black roboto text-3xl my-4 font-bold">
+    <div className="max-w-[1280px] mx-auto md:p-4  flex items-start md:justify-center gap-4">
+      <div className="w-full grow md:grow-0 md:mt-8">
+        <h1 className="text-center text-black roboto text-lg md:text-3xl my-4 font-bold">
           Add Your Product Details
         </h1>
-        <div className="overflow-hidden w-full rounded-md border py-4 border-gray-400">
-          <div className="p-4 border-b border-gray-400">
+        <div className="overflow-hidden w-full rounded-md md:border py-4 border-gray-400">
+          <div className="p-4 border-y md:border-b border-gray-400">
             <h2 className="text-sm font-bold text-black uppercase">
               Selected category
             </h2>
@@ -151,8 +151,8 @@ const ProductDetail = () => {
                   formData.append("category", id);
                   formData.append("brand", values.brand);
                   formData.append("userId", user._id);
-                  console.log( "location",
-                  `${location?.neighbourhood}, ${location?.city}, ${location?.state}`)
+                  // console.log( "location",
+                  // `${location?.neighbourhood}, ${location?.city}, ${location?.state}`)
                   formData.append(
                     "location",location
                   );
@@ -199,7 +199,7 @@ const ProductDetail = () => {
               }) => (
                 <form onSubmit={handleSubmit}>
                   <div className="border-b border-gray-400">
-                    <div className="w-[600px] p-6">
+                    <div className="w-full md:w-[600px] p-6">
                       <h2 className="text-lg font-bold text-black uppercase">
                         Include some deatils
                       </h2>
@@ -305,7 +305,7 @@ const ProductDetail = () => {
                     </div>
                   </div>
                   <div className="border-b border-gray-400">
-                    <div className="w-[600px] p-6">
+                    <div className="w-full md:w-[600px] p-6">
                       <h2 className="text-lg font-bold text-black uppercase">
                         Set a price
                       </h2>
@@ -338,7 +338,7 @@ const ProductDetail = () => {
                   </div>
 
                   <div className="border-b border-gray-400">
-                    <div className="w-[600px] p-6">
+                    <div className="w-full md:w-[600px] p-6">
                       <h2 className="text-lg font-bold text-black uppercase">
                         Upload up to 12 photos
                       </h2>
@@ -385,7 +385,7 @@ const ProductDetail = () => {
                     </div>
                   </div>
                   <div className="border-b border-gray-400">
-                    <div className="w-[600px] p-6">
+                    <div className="w-full md:w-[600px] p-6">
                       <h2 className="text-lg font-bold text-black uppercase">
                         Your Location
                       </h2>
