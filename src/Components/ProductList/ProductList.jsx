@@ -10,6 +10,7 @@ import { UserContext } from "../../contexts/User/UserContext";
 import { notification } from "antd";
 import { FaPlus } from "react-icons/fa";
 import { LoginContext } from "../../contexts/Login/LoginContext";
+import CardSkeleton from "./CardSkeleton";
 
 const ProductList = () => {
   const { search, loading } = useContext(SearchContext);
@@ -40,48 +41,62 @@ const ProductList = () => {
         Fresh Recommendations
       </h1>
       <>
-        {loading ? (
-          <Loader />
-        ) : (
-          <>
-            <div className="flex justify-start mb-4 gap-4 flex-wrap mt-4">
-              {search &&
-                search.map((product, i) => {
-                  return (
-                    <>
+        <>
+          <div className="flex justify-start mb-4 gap-4 flex-wrap mt-4">
+            {loading ? (
+              <>
+                
+                <CardSkeleton />
+                <CardSkeleton />
+                <CardSkeleton />
+                <CardSkeleton />
+                <CardSkeleton />
+                <CardSkeleton />
+                <CardSkeleton />
+                <CardSkeleton />
+                <CardSkeleton />
+                <CardSkeleton />
+                <CardSkeleton />
+                <CardSkeleton />
+              </>
+            ) : (
+              search &&
+              search.map((product, i) => {
+                return (
+                  <>
+                    <div key={i} className="grow md:grow-0 relative">
+                      <div
+                        onClick={() => addFav(user._id, product._id)}
+                        className="p-2  absolute right-[10%] top-[8%] cursor-pointer bg-white z-[9] rounded-full"
+                      >
+                        <div className="text-2xl">
+                          <IoMdHeartEmpty />
+                        </div>
+                      </div>
                       {loading ? (
-                        <Loader />
+                        <CardSkeleton />
                       ) : (
-                        <div key={i} className="grow md:grow-0 relative">
-                          <div
-                            onClick={() => addFav(user._id, product._id)}
-                            className="p-2  absolute right-[10%] top-[8%] cursor-pointer bg-white z-[9] rounded-full"
-                          >
-                            <div className="text-2xl">
-                              <IoMdHeartEmpty />
-                            </div>
-                          </div>
-                          <div onClick={() => singleHand(product._id)}>
-                            <ProductCard
-                              title={product.title}
-                              price={product.price}
-                              location={product.location}
-                              day={product.day}
-                              thumbnail={
-                                "https://olx-backend-pexw.onrender.com/uploads/product/" +
-                                product.thumbnail
-                              }
-                            />
-                          </div>
+                        <div onClick={() => singleHand(product._id)}>
+                          <ProductCard
+                            title={product.title}
+                            price={product.price}
+                            location={product.location}
+                            day={product.day}
+                            thumbnail={
+                              "https://olx-backend-pexw.onrender.com/uploads/product/" +
+                              product.thumbnail
+                            }
+                          />
                         </div>
                       )}
-                    </>
-                  );
-                })}
-            </div>
-            {/* <button onClick={handlePage} className="py-2 transition-[all.8s] px-6 mx-auto border-2 border-black rounded-md bg-white text-black roboto font-medium text-[1.2vw] mt-4 active:scale-[.98]">Load More</button> */}
-          </>
-        )}
+                    </div>
+                  </>
+                );
+              })
+            )}
+          </div>
+          {/* <button onClick={handlePage} className="py-2 transition-[all.8s] px-6 mx-auto border-2 border-black rounded-md bg-white text-black roboto font-medium text-[1.2vw] mt-4 active:scale-[.98]">Load More</button> */}
+        </>
       </>
       <div className="sell  sticky bottom-8 flex justify-center z-[999] ">
         <button

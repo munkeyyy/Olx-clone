@@ -5,7 +5,8 @@ import thumb from "../../images/wheelchair.jpg"
 
 const ProductCard = ({ title, price, location, day, thumbnail }) => {
   return (
-    <div className="p-2 cursor-pointer  border w-full md:w-[29vw] lg:w-[21vw] xl:w-[18vw] bg-white overflow-clip border-gray-300 rounded-lg">
+    <>
+    {<div className="p-2 cursor-pointer  border w-full md:w-[29vw] lg:w-[21vw] xl:w-[18vw] bg-white overflow-clip border-gray-300 rounded-lg">
       <div className="image h-[10rem] bg-gray-300 w-full">
        
           <img
@@ -31,7 +32,8 @@ const ProductCard = ({ title, price, location, day, thumbnail }) => {
             <span className="text-[3vw] md:text-[.7vw]">{day}</span>
           </div>
         </div>
-    </div>
+    </div>}
+    </>
   );
 };
 

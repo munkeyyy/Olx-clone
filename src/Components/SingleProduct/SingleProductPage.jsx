@@ -107,11 +107,11 @@ const SingleProductPage = () => {
                       <SwiperSlide key={i}>
                         <div className="w-full h-[80vw] md:w-[26vw] md:h-[26vw] bg-white mx-auto">
                           <img
-                          loading="lazy"
-                           onError={(e) => {
-                            e.currentTarget.src =
-                              "https://olx-backend-pexw.onrender.com/uploads/product/image%20(9)-1714453287058.jpg";
-                          }}
+                            loading="lazy"
+                            onError={(e) => {
+                              e.currentTarget.src =
+                                "https://olx-backend-pexw.onrender.com/uploads/product/image%20(9)-1714453287058.jpg";
+                            }}
                             src={`https://olx-backend-pexw.onrender.com/uploads/product/${elem}`}
                             className="h-full self-center object-center w-full object-cover"
                             alt="img"
@@ -126,7 +126,9 @@ const SingleProductPage = () => {
           <div className="p-3 mt-4 shadow-md bg-white rounded-md border-2">
             {products.brand !== null && (
               <div className="pb-2 border-b-2">
-                <h1 className="text-black font-bold text-[4vw] md:text-[1.2vw]">Details</h1>
+                <h1 className="text-black font-bold text-[4vw] md:text-[1.2vw]">
+                  Details
+                </h1>
 
                 <div className="flex items-center justify-between">
                   <h3 className="text-[3.8vw]  md:text-[1vw] font-normal roboto text-gray-400">
@@ -139,7 +141,9 @@ const SingleProductPage = () => {
               </div>
             )}
             <div className="desc mt-4">
-              <h1 className="text-black font-bold text-[4vw] md:text-[1.2vw]">Description</h1>
+              <h1 className="text-black font-bold text-[4vw] md:text-[1.2vw]">
+                Description
+              </h1>
               <div className="">{products.description}</div>
             </div>
           </div>
@@ -173,18 +177,18 @@ const SingleProductPage = () => {
             </div>
           </div>
           <div className="border-2 mt-2 p-3  bg-white rounded-md">
+            <h1 className="mb-4 font-bold text-lg">Posted By</h1>
             <div
               onClick={() => navigate(`/profile/${products?.userId?._id}`)}
               className="flex cursor-pointer items-center justify-start gap-3"
             >
               <div className="profile-image w-16 h-16 overflow-clip rounded-full">
                 <img
-                  src= {
+                  src={
                     products?.userId?.avatar
                       ? `https://olx-backend-pexw.onrender.com/uploads/users/${products?.userId?.avatar}`
                       : Avatar
                   }
-                 
                   className="object-cover h-full w-full"
                   alt=""
                 />
@@ -193,17 +197,18 @@ const SingleProductPage = () => {
                 {products?.userId?.user_name}
               </h1>
             </div>
-            <div className="mt-3 capitalize flex items-center justify-center p-3 border-2 transition-[all.8s] active:scale-[.9] cursor-pointer border-black rounded-md gap-3">
-              <div>
-                <FaPhoneAlt />
-              </div>
-              <a
-                className="black font-semibold"
-                href={`tel:${products?.userId?.phone} `}
-              >
-                Take A call
-              </a>
-            </div>
+           
+                <div className="mt-3 capitalize flex items-center justify-center p-3 border-2 transition-[all.8s] active:scale-[.9] cursor-pointer border-black rounded-md gap-3">
+                  <div>
+                    <FaPhoneAlt />
+                  </div>
+                  <a
+                    className="black font-semibold"
+                    href={`tel:${products?.userId?.phone} `}
+                  >
+                    Take A call
+                  </a>
+                </div>
           </div>
           <div className="border-2 mt-2 p-3  bg-white rounded-md">
             <h1 className="text-[4.8vw] md:text-[1.2vw] font-bold roboto text-balck">

@@ -11,9 +11,11 @@ import { baseUrl } from "../../utils";
 import Listed from "../../images/no-publications.webp";
 import ProductCard from "../ProductList/ProductCard";
 import { MdDelete } from "react-icons/md";
+import CardSkeleton from "../ProductList/CardSkeleton";
 const ProfilePage = () => {
   const [userInfo, setUserInfo] = useState({});
   const [posts, setPosts] = useState([]);
+  const [loading, setIsLoading] = useState(true);
   const { user } = useContext(UserContext);
 
   const { user_id } = useParams();
@@ -35,7 +37,8 @@ const ProfilePage = () => {
         console.log("posts", postData);
         const filteredPost = postData.filter((post) => post.userId === user_id);
         console.log(filteredPost);
-        setPosts(filteredPost)
+        setPosts(filteredPost);
+        setIsLoading(false)
       })
       .catch((err) => console.log(err));
   }, []);
@@ -49,7 +52,7 @@ const ProfilePage = () => {
         <div className="flex items-center gap-4 justify-start">
           <div className="profile-image w-20 h-20 md:w-32 md:h-32 overflow-clip rounded-full">
             <img
-            loading="lazy"
+              loading="lazy"
               src={
                 userInfo.avatar
                   ? `https://olx-backend-pexw.onrender.com/uploads/users/${
@@ -116,9 +119,20 @@ const ProfilePage = () => {
       <div className="w-full md:w-[75%]">
         <div className="mx-auto my-0 max-w-[1340px] md:px-8 py-6">
           <h1 className="text-2xl font-bold roboto">Posts</h1>
-          {posts.lenght!==0 ? (
+          {posts.lenght !== 0 ? (
             <div className="flex justify-start gap-4 flex-wrap mt-4">
-              {posts &&
+              {loading ? (
+                <>
+                <CardSkeleton />
+                <CardSkeleton />
+                <CardSkeleton />
+                <CardSkeleton />
+                <CardSkeleton />
+                <CardSkeleton />
+                <CardSkeleton />
+                </>
+              ) : (
+                posts &&
                 posts.map((post, i) => {
                   return (
                     <div className="relative" key={i}>
@@ -130,11 +144,7 @@ const ProfilePage = () => {
                     <MdDelete />
                   </div>
                 </div> */}
-                      <div
-                        onClick={() =>
-                          navigate(`/single_page/${post._id}`)
-                        }
-                      >
+                      <div onClick={() => navigate(`/single_page/${post._id}`)}>
                         <ProductCard
                           title={post.title}
                           location={post.location}
@@ -148,7 +158,8 @@ const ProfilePage = () => {
                       </div>
                     </div>
                   );
-                })}
+                })
+              )}
             </div>
           ) : (
             <>

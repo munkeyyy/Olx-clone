@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { baseUrl } from '../../utils'
 import { SearchContext } from '../../contexts/Search/SearchContext'
 
-const SubCatData = () => {
+const SubCatData = ({isRotating,setIsRotating}) => {
     const[subCat, setSubCat]=useState([])
     const{getData}= useContext(SearchContext)
 
@@ -20,10 +20,14 @@ const SubCatData = () => {
             subCat.map((elem,i)=>{
                 return (
                     <div key={i} className='h-[max-content]'>
-                        <h1 onClick={()=>getData(elem.title)} className='font-medium text-[1vw] roboto cursor-pointer hover:text-[#00a49f]'>{elem.title}</h1>
+                        <h1 onClick={()=>{getData(elem.title)
+                            setIsRotating(!isRotating)
+                        }} className='font-medium text-[1vw] roboto cursor-pointer hover:text-[#00a49f]'>{elem.title}</h1>
                         {elem.subcategory.map((sub,j)=>(
                             <ul key={j}>
-                                <li onClick={()=>getData(sub.title)} className='roboto text-[.9vw] cursor-pointer my-2 text-black hover:text-[#00a49f]' key={i}>{sub.title}</li>
+                                <li onClick={()=>{getData(sub.title)
+                                    setIsRotating(!isRotating)
+                                }} className='roboto text-[.9vw] cursor-pointer my-2 text-black hover:text-[#00a49f]' key={i}>{sub.title}</li>
                             </ul>
                         ))}
                     </div>
