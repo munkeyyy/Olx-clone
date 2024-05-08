@@ -14,6 +14,7 @@ import Favourites from "./Components/Favourites/Favourites";
 import SingleProductPage from "./Components/SingleProduct/SingleProductPage";
 import Post from "./Components/Post/Post";
 import ProductDetail from "./Components/Post/ProductDetail";
+import Chat from "./Components/Chat/Chat";
 function App() {
   return (
     <UserProvider>
@@ -22,8 +23,7 @@ function App() {
           <div className="App">
             <NavBar />
             <div className="hidden md:block">
-            <CategoryBar />
-
+              <CategoryBar />
             </div>
 
             <Routes>
@@ -39,8 +39,9 @@ function App() {
               <Route path="/editprofile" element={<EditProfile />} />
               <Route path="/profile/:user_id" element={<ProfilePage />} />
               <Route path="/my-favourites" element={<Favourites />} />
-              <Route path="/post" element={<Post/>} />
-              <Route path="/attributes/:id" element={<ProductDetail/>} />
+              <Route path="/post" element={<Post />} />
+              <Route path="/attributes/:id" element={<ProductDetail />} />
+              <Route path="/chat" element={<Chat/>} />
             </Routes>
             <Footer />
           </div>

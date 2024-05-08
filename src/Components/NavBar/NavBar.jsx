@@ -1,18 +1,16 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Select, Space, Popover, Modal, notification, Drawer } from "antd";
 import Logo from "../Logo";
-import { IoChevronDownOutline, IoSearchSharp } from "react-icons/io5";
 import { FaPlus } from "react-icons/fa";
 import SingnUp from "../SignUp/SingnUp";
 import LogIn from "../LogIn/LogIn";
 import { LoginContext } from "../../contexts/Login/LoginContext";
 import UserProfile from "../UserProfile/UserProfile";
-import LogInProvider from "../../contexts/Login/LogInProvider";
-import UserProvider from "../../contexts/User/UserProvider";
 import { useNavigate } from "react-router-dom";
-import Loader from "../Loader";
 import axios from "axios";
 import { SearchContext } from "../../contexts/Search/SearchContext";
+import { RiChat1Line } from "react-icons/ri";
+
 // import { baseUrl } from "../../utils";
 import { MdOutlineMenu } from "react-icons/md";
 const NavBar = () => {
@@ -215,6 +213,9 @@ const NavBar = () => {
           </div>
         </form>
       </div>
+      <button  onClick={()=>navigate("/chat")} className="hidden md:block text-3xl font-bold text-[rgba(0,0,0,0.685)] transition-all hover:text-black">
+      <RiChat1Line />
+      </button>
       <button className="lang hidden md:block overflow-hidden p-3 w-[20%] bg-white">
         <div id="google_translate_element"></div>
       </button>
