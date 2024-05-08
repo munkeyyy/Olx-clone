@@ -25,7 +25,7 @@ const Post = () => {
   const navigate=useNavigate()
   return (
     <div className="max-w-[1280px] mx-auto p-4  flex items-start md:justify-center gap-4">
-      <div className="mt-12 w-full">
+      <div className="mt-12 grow md:grow-0">
         <h1 className="text-center text-black roboto text-3xl my-4 font-bold">
           Add Your Product
         </h1>

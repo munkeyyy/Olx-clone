@@ -71,7 +71,7 @@ const ProductDetail = () => {
 
   return (
     <div className="max-w-[1280px] mx-auto md:p-4  flex items-start md:justify-center gap-4">
-      <div className="w-full grow md:grow-0 md:mt-8">
+      <div className="grow md:grow-0 md:mt-8">
         <h1 className="text-center text-black roboto text-lg md:text-3xl my-4 font-bold">
           Add Your Product Details
         </h1>

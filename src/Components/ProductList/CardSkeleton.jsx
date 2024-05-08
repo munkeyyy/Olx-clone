@@ -7,7 +7,7 @@ const CardSkeleton = () => {
       <div className="h-28 w-full">
         <Skeleton.Image  className="h-full w-full" active />
       </div>
-      <div>
+      <div className="mt-3">
         <Skeleton
           active
           paragraph={{
