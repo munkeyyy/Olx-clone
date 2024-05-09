@@ -69,7 +69,7 @@ const ProductList = () => {
                         onClick={() => addFav(user._id, product._id)}
                         className="p-2  absolute right-[10%] top-[8%] cursor-pointer bg-white z-[9] rounded-full"
                       >
-                        <div className="text-2xl">
+                        <div className="text-2xl text-black">
                           <IoMdHeartEmpty />
                         </div>
                       </div>

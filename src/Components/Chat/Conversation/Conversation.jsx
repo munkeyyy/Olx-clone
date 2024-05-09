@@ -12,7 +12,7 @@ const Conversation = () => {
             <img src={Avatar} alt="" className="h-full w-full cover" />
           </div>
           <div>
-            <h2 className="text-[1.08vw] font-bold uppercase">
+            <h2 className="text-[1.08vw] text-black font-bold uppercase">
               Abhishek Sharma
             </h2>
             <p>sometsjkksjsj loee oebndbkjn</p>

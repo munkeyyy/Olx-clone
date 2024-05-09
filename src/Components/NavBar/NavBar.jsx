@@ -181,7 +181,7 @@ const NavBar = () => {
       </div> */}
       <div
         onClick={handleClick}
-        className="hidden bg-white transition-[all.8s] active:scale-[.95] location cursor-pointer border-black border-2 py-2 px-6 text-[1.2vw] md:w-[38%] md:flex justify-center lg:w-[52%] rounded-sm overflow-x-auto"
+        className="hidden bg-white text-black transition-[all.8s] active:scale-[.95] location cursor-pointer border-black border-2 py-2 px-6 text-[1.2vw] md:w-[38%] md:flex justify-center lg:w-[52%] rounded-sm overflow-x-auto"
       >
         <>
           {isClicked

@@ -20,7 +20,7 @@ function App() {
     <UserProvider>
       <SearchProvider>
         <LogInProvider>
-          <div className="App">
+          <div className="App bg-white">
             <NavBar />
             <div className="hidden md:block">
               <CategoryBar />
