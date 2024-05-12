@@ -9,39 +9,48 @@ import { ConversationContext } from "../../../contexts/Conversation/Conversation
 import axios from "axios";
 import { baseUrl } from "../../../utils";
 import { UserContext } from "../../../contexts/User/UserContext";
+import { notification } from "antd";
 const ChatWindow = () => {
+const token=  localStorage.getItem("token")
   const {
     selectedConversation,
     setSelectedConversation,
     messages,
     setMessages,
   } = useContext(ConversationContext);
-  const { user } = useContext(UserContext);
+  const { user, setConvoId } = useContext(UserContext);
+  const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   useEffect(() => {
     return () => setSelectedConversation(null);
   }, [setSelectedConversation]);
-  const getMessages = async () => {
+  const sendMessage = async () => {
+    setLoading(true);
     await axios
-      .post(
-        `${baseUrl}messages/send/${selectedConversation?._id}`,
-        {
-          body: {
-            message: message,
-            senderId: user._id,
-          },
+      .post(`http://localhost:8001/api/v1/messages/send/${selectedConversation?._id}`, {
+        message: message,
+      },{
+        headers:{
+          "Authorization": token,
         }
-      )
+      })
       .then((res) => {
         console.log(res.data);
+        setMessages([...messages, res.data.newMessage]);
+        // notification.success(res.data.message)
+        setLoading(false);
+        setConvoId(res.data.conversationId)
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+          
+      });
   };
 
-  useEffect(() => {}, []);
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    getMessages();
+    if (!message) return;
+    await sendMessage();
+    setMessage("");
   };
   return (
     <>
@@ -90,7 +99,7 @@ https://olx-backend-pexw.onrender.com/uploads/users/${selectedConversation.avata
                   <input
                     type="text"
                     placeholder="type a message"
-                    name=""
+                    value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     className="border bg-white w-full text-sm rounded-lg p-2.5 text-black"
                     id=""
@@ -100,7 +109,11 @@ https://olx-backend-pexw.onrender.com/uploads/users/${selectedConversation.avata
                     type="submit"
                     className="bg-[#012F34] text-white text-lg p-3 rounded-full cursor-pointer justify-center flex items-center pe-3"
                   >
-                    <IoIosSend />
+                    {loading ? (
+                      <div className="loading loading-spinner"></div>
+                    ) : (
+                      <IoIosSend />
+                    )}
                   </button>
                 </div>
               </form>
