@@ -3,19 +3,28 @@ import Avatar from "../../../images/default_avatar.webp";
 import { SlOptions, SlOptionsVertical } from "react-icons/sl";
 import { useNavigate } from "react-router-dom";
 import { ConversationContext } from "../../../contexts/Conversation/ConversationContext";
+import { SocketContext } from "../../../contexts/Socket/SocketContext";
 const Conversation = ({ conversation }) => {
+  // console.log("convo", conversation)
   const navigate = useNavigate();
   const { selectedConversation, setSelectedConversation } =
     useContext(ConversationContext);
   const isSelected = selectedConversation?._id === conversation._id;
+  const {onlineUsers}=useContext(SocketContext)
+  const isOnline = onlineUsers.includes(conversation._id)
+  console.log("ye kya hai",selectedConversation)
   return (
     <div
-      onClick={() => setSelectedConversation(conversation)}
+      onClick={() => {setSelectedConversation(conversation)
+        console.log("selectedConcvo", selectedConversation)
+      }}
       className={`p-2 border-b-2  ${isSelected ? "bg-gray-200" : ""}`}
     >
       <div className="flex items-center justify-between">
         <div className="flex items-start gap-3">
-          <div className="h-16 w-16 rounded-full overflow-clip">
+          <div className={`avatar ${isOnline?'online':''}`}>
+
+          <div className="h-16 w-16  rounded-full overflow-clip">
             <img
               src={
                 conversation.avatar
@@ -25,6 +34,7 @@ const Conversation = ({ conversation }) => {
               alt=""
               className="h-full w-full object-cover"
             />
+          </div>
           </div>
           <div>
             <h2 className="text-[1.08vw] text-black font-bold uppercase">

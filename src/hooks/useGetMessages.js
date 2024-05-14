@@ -5,8 +5,9 @@ import { baseUrl } from '../utils'
 
 const useGetMessages = () => {
     const[loading, setLoading]=useState(false)
-    const {messages,setMessages, selectedConversation, convoId}=useContext(ConversationContext)
+    const {messages,setMessages, selectedConversation}=useContext(ConversationContext)
     const token = localStorage.getItem("token")
+    console.log(messages)
     useEffect(()=>{
         const getMessages=async()=>{
             setLoading(true)
@@ -21,6 +22,7 @@ const useGetMessages = () => {
                 console.log(res.data)
                 setLoading(false)
                 setMessages(res.data)
+                console.log("messagesafternew1", messages)
             })
             .catch((err)=>console.log(err))
         }

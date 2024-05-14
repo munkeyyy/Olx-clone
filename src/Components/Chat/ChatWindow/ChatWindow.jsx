@@ -22,10 +22,14 @@ const token=  localStorage.getItem("token")
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   useEffect(() => {
+    console.log(selectedConversation)
     return () => setSelectedConversation(null);
   }, [setSelectedConversation]);
+  
   const sendMessage = async () => {
+    console.log("selected",selectedConversation._id)
     setLoading(true);
+    console.log("ye kons message hai?",message)
     await axios
       .post(`http://localhost:8001/api/v1/messages/send/${selectedConversation?._id}`, {
         message: message,
@@ -35,14 +39,15 @@ const token=  localStorage.getItem("token")
         }
       })
       .then((res) => {
-        console.log(res.data);
-        setMessages([...messages, res.data.newMessage]);
+        console.log("newmesson post",res.data);
+        setMessages([...messages, res.data]);  
         // notification.success(res.data.message)
+        console.log("lastmessage",messages.slice(0))
         setLoading(false);
-        setConvoId(res.data.conversationId)
+        // setConvoId(res.data.conversationId)
       })
       .catch((err) => {
-          
+          console.log(err)
       });
   };
 

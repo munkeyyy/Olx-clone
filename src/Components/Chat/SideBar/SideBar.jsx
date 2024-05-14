@@ -12,6 +12,7 @@ const SideBar = () => {
         .get(`${baseUrl}users/get-users`)
         .then((res) => {
           setConversations(res.data.data);
+          console.log(conversations)
           setLoading(false);
         })
         .catch((err) => console.log(err));

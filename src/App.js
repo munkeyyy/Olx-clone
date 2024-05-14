@@ -17,7 +17,6 @@ import ProductDetail from "./Components/Post/ProductDetail";
 import Chat from "./Components/Chat/Chat";
 function App() {
   return (
-    <UserProvider>
       <SearchProvider>
         <LogInProvider>
           <div className="App bg-white">
@@ -47,7 +46,6 @@ function App() {
           </div>
         </LogInProvider>
       </SearchProvider>
-    </UserProvider>
   );
 }
 

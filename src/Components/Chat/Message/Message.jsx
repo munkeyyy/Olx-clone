@@ -8,11 +8,12 @@ import moment from "moment";
 const Message = ({message}) => {
   const{selectedConversation}=useContext(ConversationContext)
   const{user}=useContext(UserContext)
-  const LoggedInUser=message.senderId===user._id
+  const LoggedInUser=message?.senderId===user._id
   const className = LoggedInUser? "chat-end" :"chat-start"
   const profilePic =LoggedInUser? user?.avatar :selectedConversation?.avatar
   const bubbleColor= LoggedInUser?"bg-[#ceddff]" : "bg-gray-300"
-
+  console.log("receive",message.receiverId)
+  console.log("Send", message.senderId)
   return (
     <>
     <div className={`chat mt-4 ${className}`}>
