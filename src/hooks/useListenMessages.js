@@ -8,9 +8,9 @@ const useListenMessages = () => {
 
   useEffect(()=>{
         socket?.on("newMessage",(newMessage)=>{
-            console.log("New message received:", newMessage);
+            // console.log("New message received:", newMessage);
             setMessages([...messages, newMessage])
-            console.log("mesageafterNew", messages)
+            // console.log("mesageafterNew", messages)
         })
         console.log("Listening for new messages"); 
         return ()=>socket?.off("newMessage")

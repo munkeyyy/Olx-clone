@@ -11,7 +11,7 @@ const SocketProvider = ({ children }) => {
   useEffect(() => {
     if (user) {
       console.log("User:", user);
-      const socket = io("http://localhost:8001", {
+      const socket = io("https://olx-backend-pexw.onrender.com", {
         query: {
           userId: user._id,
         },

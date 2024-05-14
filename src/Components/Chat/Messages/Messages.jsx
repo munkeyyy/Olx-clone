@@ -19,7 +19,7 @@ const Messages = () => {
 // },[messages])
   return (
     <div className="px-4 mb-24 side flex-1 overflow-auto">
-      {console.log(messages)}
+      {/* {console.log(messages)} */}
       {!loading &&
         messages.length > 0 &&
         messages?.map((message,i) => (

@@ -7,11 +7,11 @@ const useGetMessages = () => {
     const[loading, setLoading]=useState(false)
     const {messages,setMessages, selectedConversation}=useContext(ConversationContext)
     const token = localStorage.getItem("token")
-    console.log(messages)
+    // console.log(messages)
     useEffect(()=>{
         const getMessages=async()=>{
             setLoading(true)
-            await axios.get(`http://localhost:8001/api/v1/messages/get/${selectedConversation._id}`,
+            await axios.get(`${baseUrl}messages/get/${selectedConversation._id}`,
             {
                 headers:{
                   "Authorization": token,
@@ -22,7 +22,7 @@ const useGetMessages = () => {
                 console.log(res.data)
                 setLoading(false)
                 setMessages(res.data)
-                console.log("messagesafternew1", messages)
+                // console.log("messagesafternew1", messages)
             })
             .catch((err)=>console.log(err))
         }

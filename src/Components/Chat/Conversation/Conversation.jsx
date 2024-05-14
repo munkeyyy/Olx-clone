@@ -12,11 +12,11 @@ const Conversation = ({ conversation }) => {
   const isSelected = selectedConversation?._id === conversation._id;
   const {onlineUsers}=useContext(SocketContext)
   const isOnline = onlineUsers.includes(conversation._id)
-  console.log("ye kya hai",selectedConversation)
+  // console.log("ye kya hai",selectedConversation)
   return (
     <div
       onClick={() => {setSelectedConversation(conversation)
-        console.log("selectedConcvo", selectedConversation)
+        // console.log("selectedConcvo", selectedConversation)
       }}
       className={`p-2 border-b-2  ${isSelected ? "bg-gray-200" : ""}`}
     >
