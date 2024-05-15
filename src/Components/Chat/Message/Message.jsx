@@ -30,7 +30,7 @@ const Message = ({message}) => {
         {message.message}.
       </div>
       <div className="chat-footer opacity-50 text-xs flex gap-1  items-center">
-        {moment(message.createdAt).format('LT')}
+     
       </div>
     </div>
     {/* <div className="chat chat-end mt-4">
