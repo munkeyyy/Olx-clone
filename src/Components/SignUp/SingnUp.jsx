@@ -49,7 +49,7 @@ const SingnUp = ({ setIsSignedUp }) => {
               notification.success({
                 message: "signed up successfully",
               });
-              setIsSignedUp(false);
+              setIsSignedUp(true);
             })
             .catch((err) => {
               console.log(err);

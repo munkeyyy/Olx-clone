@@ -3,7 +3,7 @@ import { UserContext } from "../../contexts/User/UserContext";
 import { useNavigate } from "react-router-dom";
 import { Formik } from "formik";
 import axios from "axios";
-import { notification } from "antd";
+import { Modal, notification } from "antd";
 import { baseUrl } from "../../utils";
 import Avatar from "../../images/default_avatar.webp";
 import { FaPencil } from "react-icons/fa6";
@@ -24,11 +24,30 @@ const EditProfile = () => {
     setImg(URL.createObjectURL(e.target.files[0]));
     handleChange(e);
   };
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const showModal=()=>{
+    setIsModalOpen(true)
+  }
+const onClose=()=>{
+  setIsModalOpen(false)
+}
   // const updateImage = (e)=>{
   //   const url = URL.createObjectURL(e.target.files[0])
   //   setImg(url)
   // }
+
+  const deleteUser=()=>{
+    axios.delete(`${baseUrl}users/delete-user/${user._id}`)
+    .then((res)=>{
+      notification.success({
+        message: res.data.message,
+        duration:1,
+      });
+      localStorage.clear()
+      navigate("/")
+    })
+    .catch((err)=>console.log(err))
+  }
   return (
     <div className="flex items-start gap-6 realtive p-0 md:p-10 mx-auto my-0 max-w-[1280px]">
       <div className="hidden md:block w-[20%] sticky top-[120px]  ">
@@ -46,6 +65,21 @@ const EditProfile = () => {
         >
           view Profile
         </button>
+        <button
+          onClick={showModal}
+          className="text-black mt-3 bg-white border-[3px] border-black py-2 px-4 rounded-md roboto font-medium w-full capitalize"
+        >
+          Delete Profile
+        </button>
+        <Modal title="" open={isModalOpen} onCancel={() => setIsModalOpen(false)}>
+          <div className="p-2">
+            <p className="mt-2 font-medium">Are you sure, you want to delete your account?</p>
+            <div className="flex mt-4 items-center justify-end gap-4">
+            <button className="py-2 px-3 text-white font-semibold  bg-black rounded-md" onClick={()=>setIsModalOpen(false)}>Cancel</button>
+            <button className="py-2 px-3 text-white font-semibold  bg-red-400 rounded-md" onClick={deleteUser}>Delete</button>
+            </div>
+          </div>
+        </Modal>
       </div>
       <div className="w-full md:w-[80%] rounded-md md:border-2 border-[rgba(0,0,0,0.15)]">
         <div className="hidden md:block p-4">

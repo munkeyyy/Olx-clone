@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { baseUrl } from "../../utils";
 import axios from "axios";
 import {
@@ -23,6 +23,7 @@ import moment from "moment";
 import Avatar from "../../images/default_avatar.webp";
 import { LoginContext } from "../../contexts/Login/LoginContext";
 import { FaPhoneAlt } from "react-icons/fa";
+import { IoChatbubblesSharp } from "react-icons/io5";
 
 const SingleProductPage = () => {
   const navigate = useNavigate();
@@ -197,18 +198,21 @@ const SingleProductPage = () => {
                 {products?.userId?.user_name}
               </h1>
             </div>
-           
-                <div className="mt-3 capitalize flex items-center justify-center p-3 border-2 transition-[all.8s] active:scale-[.9] cursor-pointer border-black rounded-md gap-3">
-                  <div>
-                    <FaPhoneAlt />
-                  </div>
-                  <a
-                    className="black font-semibold"
-                    href={`tel:${products?.userId?.phone} `}
-                  >
-                    Take A call
-                  </a>
-                </div>
+
+            <div className="mt-3 capitalize flex items-center justify-center p-3 border-2 transition-[all.8s] active:scale-[.9] cursor-pointer border-black rounded-md gap-3">
+              <div className="text-xl text-black">
+                <IoChatbubblesSharp />
+              </div>
+              <Link to={"/chat"} className="text-black font-semibold">
+                Chat With User
+              </Link>
+            </div>
+            <div className="flex items-center gap-3 mt-2">
+            <span className="text-[1.1vw] font-semibold">Take a call :-</span>
+            <a className="text-black font-medium underline underline-offset-2" href={`tel:${user.phone}`}>
+              {user.phone}
+            </a>
+            </div>
           </div>
           <div className="border-2 mt-2 p-3  bg-white rounded-md">
             <h1 className="text-[4.8vw] md:text-[1.2vw] font-bold roboto text-balck">

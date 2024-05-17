@@ -12,6 +12,7 @@ import Listed from "../../images/no-publications.webp";
 import ProductCard from "../ProductList/ProductCard";
 import { MdDelete } from "react-icons/md";
 import CardSkeleton from "../ProductList/CardSkeleton";
+import { notification } from "antd";
 const ProfilePage = () => {
   const [userInfo, setUserInfo] = useState({});
   const [posts, setPosts] = useState([]);
@@ -19,6 +20,8 @@ const ProfilePage = () => {
   const { user } = useContext(UserContext);
 
   const { user_id } = useParams();
+
+  
   useEffect(() => {
     axios
       .get(`${baseUrl}users/get-users/${user_id}`)
@@ -38,11 +41,19 @@ const ProfilePage = () => {
         const filteredPost = postData.filter((post) => post.userId === user_id);
         console.log(filteredPost);
         setPosts(filteredPost);
-        setIsLoading(false)
+        setIsLoading(false);
       })
       .catch((err) => console.log(err));
   }, []);
 
+  const deleteProduct=(id)=>{
+    axios.delete(`${baseUrl}products/delete-product/${id}`)
+    .then((res)=>{
+      setPosts(posts.filter((post)=>post._id!==id))
+      notification.success({message:res.data.message})
+    })
+    .catch((err)=>console.log(err))
+  }
   // console.log(user);
   const navigate = useNavigate();
 
@@ -119,17 +130,17 @@ const ProfilePage = () => {
       <div className="w-full md:w-[75%]">
         <div className="mx-auto my-0 max-w-[1340px] md:px-8 py-6">
           <h1 className="text-2xl font-bold roboto">Posts</h1>
-          {posts.lenght !== 0 ? (
+          {posts.length !== 0 ? (
             <div className="flex justify-start gap-4 flex-wrap mt-4">
               {loading ? (
                 <>
-                <CardSkeleton />
-                <CardSkeleton />
-                <CardSkeleton />
-                <CardSkeleton />
-                <CardSkeleton />
-                <CardSkeleton />
-                <CardSkeleton />
+                  <CardSkeleton />
+                  <CardSkeleton />
+                  <CardSkeleton />
+                  <CardSkeleton />
+                  <CardSkeleton />
+                  <CardSkeleton />
+                  <CardSkeleton />
                 </>
               ) : (
                 posts &&
@@ -144,17 +155,24 @@ const ProfilePage = () => {
                     <MdDelete />
                   </div>
                 </div> */}
-                      <div onClick={() => navigate(`/single_page/${post._id}`)}>
-                        <ProductCard
-                          title={post.title}
-                          location={post.location}
-                          price={post.price}
-                          day={moment(post.created_at).format("Do MMM YYYY")}
-                          thumbnail={
-                            "https://olx-backend-pexw.onrender.com/uploads/product/" +
-                            post.thumbnail
-                          }
-                        />
+                      <div className="relative">
+                        <div onClick={()=>deleteProduct(post._id)} className="absolute top-4 rounded-full p-2 text-black bg-white z-[10] transition-[all.9s] active:scale-[.9] right-4 text-lg cursor-pointer">
+                          <MdDelete />
+                        </div>
+                        <div
+                          onClick={() => navigate(`/single_page/${post._id}`)}
+                        >
+                          <ProductCard
+                            title={post.title}
+                            location={post.location}
+                            price={post.price}
+                            day={moment(post.created_at).format("Do MMM YYYY")}
+                            thumbnail={
+                              "https://olx-backend-pexw.onrender.com/uploads/product/" +
+                              post.thumbnail
+                            }
+                          />
+                        </div>
                       </div>
                     </div>
                   );

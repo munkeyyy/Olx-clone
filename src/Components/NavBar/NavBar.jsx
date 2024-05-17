@@ -198,7 +198,7 @@ const NavBar = () => {
                   </div>
                 );
               })
-            : "use current location"}
+            : "Use Current Location"}
         </>
       </div>
       <div className="search w-full lg:w-[50%] xl:w-full">

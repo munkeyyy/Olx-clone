@@ -9,7 +9,8 @@ import { LoginContext } from "../../contexts/Login/LoginContext";
 import { Modal } from "antd";
 import LogIn from "../LogIn/LogIn";
 import SingnUp from "../SignUp/SingnUp";
-const UserProfile = ({onClose}) => {
+import { MdDelete } from "react-icons/md";
+const UserProfile = ({ onClose }) => {
   const { user } = useContext(UserContext);
   const { isLoggedIn, setIsLoggedIn } = useContext(LoginContext);
   const navigate = useNavigate();
@@ -19,8 +20,11 @@ const UserProfile = ({onClose}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const showModal = () => {
-    setIsModalOpen(true);
+    isModalOpen(true);
   };
+
+  
+
   // useEffect(()=>{
   //   getLocation()
   // },[])
@@ -99,11 +103,18 @@ const UserProfile = ({onClose}) => {
             </div>
             <span>Logout</span>
           </div>
-          <div className="text-[#002f34] py-4 hover:bg-[#00ffff43] cursor-pointer font-medium text-[5vw] md:text-[1.2vw] flex items-center gap-6">
+          <div
+            onClick={() => {
+              setIsVisible(!isVisible)
+              navigate("/editprofile")
+            }}
+            className="text-[#002f34] py-4 hover:bg-[#00ffff43] cursor-pointer font-medium text-[5vw] md:text-[1.2vw] flex items-center gap-6"
+          >
             <div className="md:text-[1.5vw]">
-              <RiLockPasswordFill />
+              <MdDelete />
             </div>
-            <span>Change Password</span>
+            <span>Delete account</span>
+        
           </div>
         </div>
       </div>
@@ -142,7 +153,7 @@ const UserProfile = ({onClose}) => {
                 onClick={() => {
                   navigate(`/profile/${user._id}`);
                   setIsVisible(!isVisible);
-                  onClose()
+                  onClose();
                 }}
                 className="text-white mt-3 bg-[#002f34] py-2 px-4 rounded-md roboto font-medium w-full capitalize"
               >
@@ -156,7 +167,7 @@ const UserProfile = ({onClose}) => {
                 if (isLoggedIn) {
                   navigate("/my-favourites");
                   setIsVisible(!isVisible);
-                  onClose()
+                  onClose();
                 } else {
                   setIsModalOpen(true);
                 }
@@ -180,7 +191,6 @@ const UserProfile = ({onClose}) => {
                 onClick={() => {
                   localStorage.clear();
                   setIsLoggedIn(false);
-                  
                 }}
                 className="text-[#002f34] py-4 hover:bg-[#00ffff43] cursor-pointer font-medium text-[5vw] md:text-[1.2vw] flex items-center gap-6"
               >
@@ -190,12 +200,14 @@ const UserProfile = ({onClose}) => {
                 <span>Logout</span>
               </div>
             )}
-            {isLoggedIn&&<div className="text-[#002f34] py-4 hover:bg-[#00ffff43] cursor-pointer font-medium text-[5vw] md:text-[1.2vw] flex items-center gap-6">
-              <div className="text-[6vw] md:text-[1.5vw]">
-                <RiLockPasswordFill />
+            {isLoggedIn && (
+              <div className="text-[#002f34] py-4 hover:bg-[#00ffff43] cursor-pointer font-medium text-[5vw] md:text-[1.2vw] flex items-center gap-6">
+                <div className="text-[6vw] md:text-[1.5vw]">
+                  <MdDelete />
+                </div>
+                <span>Delete account</span>
               </div>
-              <span>Change Password</span>
-            </div>}
+            )}
           </div>
         </div>
 

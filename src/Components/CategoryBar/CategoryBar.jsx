@@ -20,6 +20,7 @@ const CategoryBar = () => {
       <button
         onClick={() => {
           setIsRotating(!isRotating);
+          getData("")
         }}
         className="flex roboto items-center  gap-2 text-[1vw] font-bold uppercase"
       >

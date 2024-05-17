@@ -46,6 +46,7 @@ const LogIn = ({ setIsModalOpen, setIsSignedUp }) => {
               console.log(res.data.data);
               notification.success({
                 message: res.data.message,
+                duration:1,
               });
               localStorage.setItem("token", res.data.token);
               localStorage.setItem("user", JSON.stringify(res.data.data))
