@@ -11,7 +11,7 @@ import { baseUrl } from "../../../utils";
 import { UserContext } from "../../../contexts/User/UserContext";
 import { notification } from "antd";
 const ChatWindow = () => {
-const token=  localStorage.getItem("token")
+  const token = localStorage.getItem("token");
   const {
     selectedConversation,
     setSelectedConversation,
@@ -25,29 +25,33 @@ const token=  localStorage.getItem("token")
     // console.log(selectedConversation)
     return () => setSelectedConversation(null);
   }, [setSelectedConversation]);
-  
+
   const sendMessage = async () => {
     // console.log("selected",selectedConversation._id)
     setLoading(true);
     // console.log("ye kons message hai?",message)
     await axios
-      .post(`${baseUrl}messages/send/${selectedConversation?._id}`, {
-        message: message,
-      },{
-        headers:{
-          "Authorization": token,
+      .post(
+        `${baseUrl}messages/send/${selectedConversation?._id}`,
+        {
+          message: message,
+        },
+        {
+          headers: {
+            Authorization: token,
+          },
         }
-      })
+      )
       .then((res) => {
         // console.log("newmesson post",res.data);
-        setMessages([...messages, res.data]);  
+        setMessages([...messages, res.data]);
         // notification.success(res.data.message)
-        console.log("lastmessage",messages.slice(0))
+        console.log("lastmessage", messages.slice(0));
         setLoading(false);
         // setConvoId(res.data.conversationId)
       })
       .catch((err) => {
-          console.log(err)
+        console.log(err);
       });
   };
 
@@ -86,9 +90,11 @@ https://olx-backend-pexw.onrender.com/uploads/users/${selectedConversation.avata
               </div>
               <div className="text-xl px-3 text-black flex gap-4 font-bold">
                 {/* <SlOptionsVertical /> */}
-                <div className="cursor-pointer">
-                  <FaPhoneAlt />
-                </div>
+                <a href={`tel:${selectedConversation.phone}`}>
+                  <div className="cursor-pointer">
+                    <FaPhoneAlt />
+                  </div>
+                </a>
                 <div className="text-xl cursor-pointer text-balck font-bold">
                   <SlOptionsVertical />
                 </div>

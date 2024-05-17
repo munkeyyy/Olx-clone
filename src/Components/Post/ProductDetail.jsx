@@ -8,6 +8,8 @@ import { FaPencil } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
 import { UserContext } from "../../contexts/User/UserContext";
+import Search from "antd/es/transfer/search";
+import { SearchContext } from "../../contexts/Search/SearchContext";
 
 const ProductDetail = () => {
   const navigate = useNavigate();
@@ -16,6 +18,7 @@ const ProductDetail = () => {
   const [selectedSubCat, setSelectedSubCat] = useState("");
   const [brandsData, setBrandsData] = useState([]);
   const { user } = useContext(UserContext);
+  const {getData}=useContext(SearchContext)
   const imgRef = useRef();
   // const [subcat, setSubcat]=useState(null)
   const [pictures, setPictures] = useState([]);
@@ -175,6 +178,7 @@ const ProductDetail = () => {
                       notification.success({
                         message: res.data.message,
                       });
+                      getData()
                       navigate("/")
                     })
                     .catch((err) => {

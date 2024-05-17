@@ -18,7 +18,7 @@ const Conversation = ({ conversation }) => {
       onClick={() => {setSelectedConversation(conversation)
         // console.log("selectedConcvo", selectedConversation)
       }}
-      className={`p-2 border-b-2  ${isSelected ? "bg-gray-200" : ""}`}
+      className={`p-2 border-b-2 cursor-pointer  ${isSelected ? "bg-gray-200" : ""}`}
     >
       <div className="flex items-center justify-between">
         <div className="flex items-start gap-3">

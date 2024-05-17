@@ -22,6 +22,10 @@ const navigate=useNavigate()
       })
       .catch((err) => console.log(err));
   };
+
+  useEffect(()=>{
+    getData()
+  },[])
   // useEffect(()=>{
   //   // window.location.reload()
   // },[search])
