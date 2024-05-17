@@ -33,7 +33,7 @@ const UserProfile = ({ onClose }) => {
     <div className="grow md:grow-0 relative">
       <div
         onClick={() => setIsVisible(!isVisible)}
-        className="profile-image hidden md:block w-12 h-12 rounded-full overflow-clip"
+        className="profile-image cursor-pointer hidden md:block w-12 h-12 rounded-full overflow-clip"
       >
         <img
           loading="eager"
