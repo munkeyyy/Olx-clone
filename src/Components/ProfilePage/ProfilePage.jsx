@@ -13,11 +13,13 @@ import ProductCard from "../ProductList/ProductCard";
 import { MdDelete } from "react-icons/md";
 import CardSkeleton from "../ProductList/CardSkeleton";
 import { notification } from "antd";
+import { SearchContext } from "../../contexts/Search/SearchContext";
 const ProfilePage = () => {
   const [userInfo, setUserInfo] = useState({});
   const [posts, setPosts] = useState([]);
   const [loading, setIsLoading] = useState(true);
   const { user } = useContext(UserContext);
+  const { getData } = useContext(SearchContext);
 
   const { user_id } = useParams();
 
@@ -51,6 +53,7 @@ const ProfilePage = () => {
     .then((res)=>{
       setPosts(posts.filter((post)=>post._id!==id))
       notification.success({message:res.data.message})
+      getData()
     })
     .catch((err)=>console.log(err))
   }
