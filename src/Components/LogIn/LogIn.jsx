@@ -48,11 +48,17 @@ const LogIn = ({ setIsModalOpen, setIsSignedUp }) => {
                 message: res.data.message,
                 duration:1,
               });
+              const logout=()=>{
+                localStorage.clear()
+                setIsLoggedIn(false)
+                navigate("/")
+                notification.error({message:"Please Log in, session expired."})
+              }
               localStorage.setItem("token", res.data.token);
               localStorage.setItem("user", JSON.stringify(res.data.data))
               setIsModalOpen(false);
               setIsLoggedIn(true);
-
+              setTimeout(logout, 3600000)
               navigate("/");
             })
             .catch((err) => {
