@@ -23,7 +23,6 @@ const ProfilePage = () => {
 
   const { user_id } = useParams();
 
-  
   useEffect(() => {
     axios
       .get(`${baseUrl}users/get-users/${user_id}`)
@@ -48,15 +47,16 @@ const ProfilePage = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  const deleteProduct=(id)=>{
-    axios.delete(`${baseUrl}products/delete-product/${id}`)
-    .then((res)=>{
-      setPosts(posts.filter((post)=>post._id!==id))
-      notification.success({message:res.data.message})
-      getData()
-    })
-    .catch((err)=>console.log(err))
-  }
+  const deleteProduct = (id) => {
+    axios
+      .delete(`${baseUrl}products/delete-product/${id}`)
+      .then((res) => {
+        setPosts(posts.filter((post) => post._id !== id));
+        notification.success({ message: res.data.message });
+        getData();
+      })
+      .catch((err) => console.log(err));
+  };
   // console.log(user);
   const navigate = useNavigate();
 
@@ -159,9 +159,14 @@ const ProfilePage = () => {
                   </div>
                 </div> */}
                       <div className="relative">
-                        <div onClick={()=>deleteProduct(post._id)} className="absolute top-4 rounded-full p-2 text-black bg-white z-[10] transition-[all.9s] active:scale-[.9] right-4 text-lg cursor-pointer">
-                          <MdDelete />
-                        </div>
+                        {user._id === userInfo._id && (
+                          <div
+                            onClick={() => deleteProduct(post._id)}
+                            className="absolute top-4 rounded-full p-2 text-black bg-white z-[10] transition-[all.9s] active:scale-[.9] right-4 text-lg cursor-pointer"
+                          >
+                            <MdDelete />
+                          </div>
+                        )}
                         <div
                           onClick={() => navigate(`/single_page/${post._id}`)}
                         >

@@ -209,8 +209,8 @@ const SingleProductPage = () => {
             </div>
             <div className="flex items-center gap-3 mt-2">
             <span className="text-[1.1vw] font-semibold">Take a call :-</span>
-            <a className="text-black font-medium underline underline-offset-2" href={`tel:${user.phone}`}>
-              {user.phone}
+            <a className="text-black font-medium underline underline-offset-2" href={`tel:${products?.userId?.phone}`}>
+              {products?.userId?.phone}
             </a>
             </div>
           </div>
