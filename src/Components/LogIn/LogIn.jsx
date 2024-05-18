@@ -35,7 +35,7 @@ const LogIn = ({ setIsModalOpen, setIsSignedUp }) => {
           return errors;
         }}
         onSubmit={(values) => {
-          console.log(values);
+          // console.log(values);
           axios
             .post(`${baseUrl}users/sign-in`, {
               email: values.email,

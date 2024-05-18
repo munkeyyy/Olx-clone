@@ -33,7 +33,7 @@ const ProductList = () => {
         // const message = res.data.message;
         notification.success({ message: res.data.message, duration: 1 });
       })
-      .catch((err) => console.log(err));
+      // .catch((err) => console.log(err));
   };
   return (
     <div className="mx-auto relative my-0 max-w-[1280px] px-4 md:px-8 py-6">
@@ -66,7 +66,7 @@ const ProductList = () => {
                   <>
                     <div key={i} className="grow md:grow-0 relative">
                       <div
-                        onClick={() => addFav(user._id, product._id)}
+                        onClick={() => {isLoggedIn?addFav(user._id, product._id):notification.error({message:"Login to add to favourites"})}}
                         className="p-2  absolute right-[10%] top-[8%] cursor-pointer bg-white z-[9] rounded-full"
                       >
                         <div className="text-2xl text-black">

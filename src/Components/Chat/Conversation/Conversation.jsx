@@ -4,6 +4,8 @@ import { SlOptions, SlOptionsVertical } from "react-icons/sl";
 import { useNavigate } from "react-router-dom";
 import { ConversationContext } from "../../../contexts/Conversation/ConversationContext";
 import { SocketContext } from "../../../contexts/Socket/SocketContext";
+import { LoginContext } from "../../../contexts/Login/LoginContext";
+import { notification } from "antd";
 const Conversation = ({ conversation }) => {
   // console.log("convo", conversation)
   const navigate = useNavigate();
@@ -12,10 +14,11 @@ const Conversation = ({ conversation }) => {
   const isSelected = selectedConversation?._id === conversation._id;
   const {onlineUsers}=useContext(SocketContext)
   const isOnline = onlineUsers.includes(conversation._id)
+  const {isLoggedIn}=useContext(LoginContext)
   // console.log("ye kya hai",selectedConversation)
   return (
     <div
-      onClick={() => {setSelectedConversation(conversation)
+      onClick={() => {isLoggedIn?setSelectedConversation(conversation):notification.error({message:"please log in first"})
         // console.log("selectedConcvo", selectedConversation)
       }}
       className={`p-2 border-b-2 cursor-pointer  ${isSelected ? "bg-gray-200" : ""}`}
