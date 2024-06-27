@@ -32,8 +32,8 @@ const ProductList = () => {
       .then((res) => {
         // const message = res.data.message;
         notification.success({ message: res.data.message, duration: 1 });
-      })
-      // .catch((err) => console.log(err));
+      });
+    // .catch((err) => console.log(err));
   };
   return (
     <div className="mx-auto relative my-0 max-w-[1280px] px-4 md:px-8 py-6">
@@ -43,57 +43,57 @@ const ProductList = () => {
       <>
         <>
           <div className="flex justify-start mb-4 gap-4 flex-wrap mt-4">
-            {loading ? (
-              <>
-                
-                <CardSkeleton />
-                <CardSkeleton />
-                <CardSkeleton />
-                <CardSkeleton />
-                <CardSkeleton />
-                <CardSkeleton />
-                <CardSkeleton />
-                <CardSkeleton />
-                <CardSkeleton />
-                <CardSkeleton />
-                <CardSkeleton />
-                <CardSkeleton />
-              </>
-            ) : (
-              search &&
+            {search &&
               search.map((product, i) => {
-                return (
+                return loading ? (
+                  
+                    <>
+                      <CardSkeleton />
+                      <CardSkeleton />
+                      <CardSkeleton />
+                      <CardSkeleton />
+                      <CardSkeleton />
+                      <CardSkeleton />
+                      <CardSkeleton />
+                      <CardSkeleton />
+                      <CardSkeleton />
+                      <CardSkeleton />
+                      <CardSkeleton />
+                      <CardSkeleton />
+                    </>
+                ) : (
                   <>
                     <div key={i} className="grow md:grow-0 relative">
                       <div
-                        onClick={() => {isLoggedIn?addFav(user._id, product._id):notification.error({message:"Login to add to favourites"})}}
+                        onClick={() => {
+                          isLoggedIn
+                            ? addFav(user._id, product._id)
+                            : notification.error({
+                                message: "Login to add to favourites",
+                              });
+                        }}
                         className="p-2  absolute right-[10%] top-[8%] cursor-pointer bg-white z-[9] rounded-full"
                       >
                         <div className="text-2xl text-black">
                           <IoMdHeartEmpty />
                         </div>
                       </div>
-                      {loading ? (
-                        <CardSkeleton />
-                      ) : (
-                        <div onClick={() => singleHand(product._id)}>
-                          <ProductCard
-                            title={product.title}
-                            price={product.price}
-                            location={product.location}
-                            day={product.day}
-                            thumbnail={
-                              "https://olx-backend-pexw.onrender.com/uploads/product/" +
-                              product.thumbnail
-                            }
-                          />
-                        </div>
-                      )}
+                      <div onClick={() => singleHand(product._id)}>
+                        <ProductCard
+                          title={product.title}
+                          price={product.price}
+                          location={product.location}
+                          day={product.day}
+                          thumbnail={
+                            "https://olx-backend-pexw.onrender.com/uploads/product/" +
+                            product.thumbnail
+                          }
+                        />
+                      </div>
                     </div>
                   </>
                 );
-              })
-            )}
+              })}
           </div>
           {/* <button onClick={handlePage} className="py-2 transition-[all.8s] px-6 mx-auto border-2 border-black rounded-md bg-white text-black roboto font-medium text-[1.2vw] mt-4 active:scale-[.98]">Load More</button> */}
         </>
